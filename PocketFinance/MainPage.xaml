@@ -4,13 +4,50 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PocketFinance.MainPage">
+             x:Class="PocketFinance.MainPage"
+             BackgroundColor="Gray">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <Grid>
+
+        <!--Grid row and column defintions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <!--end grid row and column defintions-->
+
+
+
+        <!--TOP LABEL-->
+        <Label Text="PocketFinance"
+               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
+               Margin="0,20,0,0" TextColor="Wheat" TextDecorations="Underline"/>
+        <!--END LABEL-->
+
+
+
+        <!--BUTTONS-->
+        <StackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Center"
+                     Orientation="Vertical">
+
+            <Button x:Name="btnNewExpense"
+                    Text="New Expense" TextColor="Black"
+                    BackgroundColor="Wheat" WidthRequest="200"
+                    Clicked="btnClicked_NewExpense"/>
+
+            <Button x:Name="btnNewIncome"
+                    Text="New Income" TextColor="Black"
+                    BackgroundColor="Wheat" WidthRequest="200"/>
+
+        </StackLayout>
+
+    </Grid>
 
 </ContentPage>

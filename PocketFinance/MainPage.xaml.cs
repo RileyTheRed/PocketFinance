@@ -17,5 +17,10 @@ namespace PocketFinance
         {
             InitializeComponent();
         }
+
+        void btnClicked_NewExpense(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NewExpensePage(this);
+        }
     }
 }

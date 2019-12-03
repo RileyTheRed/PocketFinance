@@ -24,7 +24,7 @@ namespace PocketFinance.Models
         public DateTime Date { get; set; }
 
         [XmlAttribute(DataType ="string")]
-        public string RecordType { get; set; }
+        public string RecordType { get; set; } // income vs expense
 
         [XmlAttribute(DataType ="string")]
         public string Category { get; set; }
