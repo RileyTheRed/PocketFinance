@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PocketFinance.ViewModels;
 using Xamarin.Forms;
 
 namespace PocketFinance
@@ -16,6 +17,7 @@ namespace PocketFinance
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel();
         }
 
         void btnClicked_NewExpense(object sender, EventArgs e)

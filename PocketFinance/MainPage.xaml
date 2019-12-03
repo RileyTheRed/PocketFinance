@@ -38,12 +38,12 @@
                      Orientation="Vertical">
 
             <Button x:Name="btnNewExpense"
-                    Text="New Expense" TextColor="Black"
+                    Text="{Binding newExpenseLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"
                     Clicked="btnClicked_NewExpense"/>
 
             <Button x:Name="btnNewIncome"
-                    Text="New Income" TextColor="Black"
+                    Text="{Binding newIncomeLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"/>
 
         </StackLayout>
