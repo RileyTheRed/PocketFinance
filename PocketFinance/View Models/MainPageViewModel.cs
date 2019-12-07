@@ -9,8 +9,20 @@ namespace PocketFinance.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         #region Properties
-        public static string newExpenseLabel = "New Expense";
-        public static string newIncomeLabel = "New Income";
+        public string newExpenseLabel
+        {
+            get { return "New Expense"; }
+        }
+
+        public string newIncomeLabel
+        {
+            get { return "New Income"; }
+        }
+
+        public string viewRecordsLabel
+        {
+            get { return "View Records"; }
+        }
         #endregion
 
         public MainPageViewModel()
