@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace PocketFinance
+namespace PocketFinance.Behaviors
 {
 	public class EventToCommandBehavior : BehaviorBase<View>
 	{
