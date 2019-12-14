@@ -2,17 +2,68 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocketFinance.NewExpensePage"
-             BackgroundColor="Gray">
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
 
-    <StackLayout>
+    
 
-        <Label Text="This is the new expense page"/>
+    <Grid>
 
-        <Button x:Name="btnReturn"
-                Text="Back" TextColor="Black"
-                BackgroundColor="Wheat"
-                Clicked="btnClicked_ReturnButton"/>
+        <!--Grid row and column defintions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <!--end grid row and column defintions-->
 
-    </StackLayout>
+
+
+        <!--TOP LABEL-->
+        <Label Text="New Expense"
+               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
+               Margin="0,20,0,0" TextColor="Wheat"/>
+        <!--END LABEL-->
+
+
+
+        <!--BUTTONS-->
+        <StackLayout Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalOptions="Center"
+                     Orientation="Vertical">
+
+            <Entry x:Name="btnNewExpense"
+                   BackgroundColor="{Binding EntryAmountColor}"
+                   WidthRequest="200"
+                   Placeholder="Enter Amount..."
+                   Text="{Binding Amount}">
+                <Entry.Behaviors>
+                    <behavior:EventToCommandBehavior
+                        EventName="Unfocused"
+                        Command="{Binding LostFocusAmount}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Picker x:Name="btnNewIncome"
+                    ItemsSource="{Binding expenseTypes}"
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="200"/>
+
+            <Button x:Name="btnViewRecords"
+                    Text=""
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="200"/>
+        </StackLayout>
+
+    </Grid>
 
 </ContentPage>
