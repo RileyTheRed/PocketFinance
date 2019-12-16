@@ -9,6 +9,8 @@ namespace PocketFinance.ViewModels
     public class NewExpensePageViewModel : INotifyPropertyChanged
     {
 
+
+
         #region Properties
         NewExpensePage parentPage;
         private double recordAmount;
@@ -24,6 +26,17 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private string _category;
+        public string Category
+        {
+            get { return _category; }
+            set
+            {
+                _category = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Category"));
+            }
+        }
+
         private string _entryAmountColor;
         public string EntryAmountColor
         {
@@ -35,11 +48,46 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private string _pickerCategoryColor;
+        public string PickerCategoryColor
+        {
+            get { return _pickerCategoryColor; }
+            set
+            {
+                _pickerCategoryColor = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("PickerCategoryColor"));
+            }
+        }
+
+        private string _datePickerColor;
+        public string DatePickerColor
+        {
+            get { return _datePickerColor; }
+            set
+            {
+                _datePickerColor = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("DatePickerColor"));
+            }
+        }
+
+        public DateTime MaxDateValue
+        {
+            get { return DateTime.Now.Date; }
+        }
+        public DateTime MinDateValue
+        {
+            get { return DateTime.MinValue; }
+        }
+
         public List<string> expenseTypes
         {
             get { return Categories.GetExpenseCategories(); }
         }
         #endregion
+
+
+
+
 
         #region Commands
         public ICommand LostFocusAmount
@@ -67,13 +115,40 @@ namespace PocketFinance.ViewModels
                 EntryAmountColor = "Salmon";
             }
         }
+
+        public ICommand LostFocusCategory
+        {
+            get
+            {
+                if (_lostFocusCategory == null)
+                {
+                    _lostFocusCategory = new DelegateCommand(CategoryLostFocus);
+                }
+                return _lostFocusCategory;
+            }
+        }
+        DelegateCommand _lostFocusCategory;
+        public void CategoryLostFocus(object obj)
+        {
+            if (Category.Equals("Select a Category..."))
+            {
+                parentPage.DisplayAlert("Alert", "Invalid Category!", "Ok");
+                PickerCategoryColor = "Salmon";
+            }
+            else
+            {
+                PickerCategoryColor = "Wheat";
+            }
+        }
         #endregion
 
         public NewExpensePageViewModel(NewExpensePage parent)
         {
             parentPage = parent;
-            //Amount = "12.0";
+            Category = "Select a Category...";
             EntryAmountColor = "Wheat";
+            PickerCategoryColor = "Wheat";
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

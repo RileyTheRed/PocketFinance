@@ -39,23 +39,62 @@
                      HorizontalOptions="Center"
                      Orientation="Vertical">
 
-            <Entry x:Name="btnNewExpense"
-                   BackgroundColor="{Binding EntryAmountColor}"
-                   WidthRequest="200"
-                   Placeholder="Enter Amount..."
-                   Text="{Binding Amount}">
-                <Entry.Behaviors>
-                    <behavior:EventToCommandBehavior
-                        EventName="Unfocused"
-                        Command="{Binding LostFocusAmount}"/>
-                </Entry.Behaviors>
-            </Entry>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Amount:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
 
-            <Picker x:Name="btnNewIncome"
-                    ItemsSource="{Binding expenseTypes}"
-                    TextColor="Black"
-                    BackgroundColor="Wheat"
-                    WidthRequest="200"/>
+                <Entry x:Name="btnNewExpense"
+                       BackgroundColor="{Binding EntryAmountColor}"
+                       WidthRequest="200"
+                       Placeholder="Enter Amount..."
+                       Text="{Binding Amount}">
+                    <Entry.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusAmount}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Category:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <Picker ItemsSource="{Binding expenseTypes}"
+                        SelectedItem="{Binding Category}"
+                        SelectedIndex="1"
+                        TextColor="Black"
+                        BackgroundColor="{Binding PickerCategoryColor}"
+                        WidthRequest="200">
+                    <Picker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusCategory}"/>
+                    </Picker.Behaviors>
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Date:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <DatePicker TextColor="Black"
+                            Date="{Binding Date}"
+                            MaximumDate="{Binding MaxDateValue}"
+                            MinimumDate="{Binding MinDateValue}"
+                            BackgroundColor="{Binding DatePickerColor}"
+                            WidthRequest="200">
+                    <DatePicker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusDate}"/>
+                    </DatePicker.Behaviors>
+                </DatePicker>
+            </StackLayout>
 
             <Button x:Name="btnViewRecords"
                     Text=""
