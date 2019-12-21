@@ -45,8 +45,7 @@
                        WidthRequest="75"
                        VerticalTextAlignment="Center"/>
 
-                <Entry x:Name="btnNewExpense"
-                       BackgroundColor="{Binding EntryAmountColor}"
+                <Entry BackgroundColor="{Binding EntryAmountColor}"
                        WidthRequest="200"
                        Placeholder="Enter Amount..."
                        Text="{Binding Amount}">
@@ -83,7 +82,7 @@
                        WidthRequest="75"
                        VerticalTextAlignment="Center"/>
                 <DatePicker TextColor="Black"
-                            Date="{Binding Date}"
+                            Date="{Binding SelectedDate}"
                             MaximumDate="{Binding MaxDateValue}"
                             MinimumDate="{Binding MinDateValue}"
                             BackgroundColor="{Binding DatePickerColor}"
@@ -96,11 +95,11 @@
                 </DatePicker>
             </StackLayout>
 
-            <Button x:Name="btnViewRecords"
-                    Text=""
+            <Button Text="Submit Expense"
                     TextColor="Black"
                     BackgroundColor="Wheat"
-                    WidthRequest="200"/>
+                    WidthRequest="200"
+                    Command="{Binding SubmitRecordCommand}"/>
         </StackLayout>
 
     </Grid>

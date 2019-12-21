@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
+using PocketFinance.Models;
 using PocketFinance.Utilities;
+using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels
 {
@@ -13,6 +15,7 @@ namespace PocketFinance.ViewModels
 
         #region Properties
         NewExpensePage parentPage;
+        RecordBook recordBook;
         private double recordAmount;
 
         private string _amount;
@@ -34,6 +37,17 @@ namespace PocketFinance.ViewModels
             {
                 _category = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("Category"));
+            }
+        }
+
+        private DateTime _selectedDate;
+        public DateTime SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                _selectedDate = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedDate"));
             }
         }
 
@@ -73,6 +87,11 @@ namespace PocketFinance.ViewModels
         public DateTime MaxDateValue
         {
             get { return DateTime.Now.Date; }
+            set
+            {
+                _ = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("MaxDateValue"));
+            }
         }
         public DateTime MinDateValue
         {
@@ -140,15 +159,41 @@ namespace PocketFinance.ViewModels
                 PickerCategoryColor = "Wheat";
             }
         }
+
+        DelegateCommand _submitRecordCommand;
+        public ICommand SubmitRecordCommand
+        {
+            get
+            {
+                if (_submitRecordCommand == null)
+                {
+                    _submitRecordCommand = new DelegateCommand(SubmitClicked);
+                }
+                return _submitRecordCommand;
+            }
+        }
+        public void SubmitClicked(object obj)
+        {
+            if (PickerCategoryColor.Equals("Wheat") &&
+                EntryAmountColor.Equals("Wheat") &&
+                DatePickerColor.Equals("Wheat"))
+            {
+                recordBook.RecordList.Add(new Record(Double.Parse(Amount), SelectedDate, "expense", Category, "", false));
+                parentPage.DisplayAlert("Success", "Record added!", "Ok");
+                Application.Current.MainPage = parentPage.parentPage;
+            }
+        }
         #endregion
 
-        public NewExpensePageViewModel(NewExpensePage parent)
+        public NewExpensePageViewModel(NewExpensePage parent, RecordBook book)
         {
             parentPage = parent;
             Category = "Select a Category...";
             EntryAmountColor = "Wheat";
             PickerCategoryColor = "Wheat";
-            
+            DatePickerColor = "Wheat";
+            MaxDateValue = DateTime.Now;
+            recordBook = book;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
