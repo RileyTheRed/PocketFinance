@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFinance.NewIncomePage"
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
+
+    
+
+    <Grid>
+
+        <!--Grid row and column defintions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <!--end grid row and column defintions-->
+
+
+
+        <!--TOP LABEL-->
+        <Label Text="New Expense"
+               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
+               Margin="0,20,0,0" TextColor="Wheat"/>
+        <!--END LABEL-->
+
+
+
+        <!--BUTTONS-->
+        <StackLayout Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalOptions="Center"
+                     Orientation="Vertical">
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Amount:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry BackgroundColor="{Binding EntryAmountColor}"
+                       WidthRequest="200"
+                       Placeholder="Enter Amount..."
+                       Text="{Binding Amount}">
+                    <Entry.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusAmount}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Category:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <Picker ItemsSource="{Binding expenseTypes}"
+                        SelectedItem="{Binding Category}"
+                        SelectedIndex="1"
+                        TextColor="Black"
+                        BackgroundColor="{Binding PickerCategoryColor}"
+                        WidthRequest="200">
+                    <Picker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusCategory}"/>
+                    </Picker.Behaviors>
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Date:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <DatePicker TextColor="Black"
+                            Date="{Binding SelectedDate}"
+                            MaximumDate="{Binding MaxDateValue}"
+                            MinimumDate="{Binding MinDateValue}"
+                            BackgroundColor="{Binding DatePickerColor}"
+                            WidthRequest="200">
+                    <DatePicker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusDate}"/>
+                    </DatePicker.Behaviors>
+                </DatePicker>
+            </StackLayout>
+
+            <Button Text="Submit Income"
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="200"
+                    Command="{Binding SubmitRecordCommand}"/>
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>
