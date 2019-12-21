@@ -46,6 +46,9 @@
                     Text="{Binding newIncomeLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"/>
 
+            <Button x:Name="btnViewRecords"
+                    Text="{Binding viewRecordsLabel}" TextColor="Black"
+                    BackgroundColor="Wheat" WidthRequest="200"/>
         </StackLayout>
 
     </Grid>

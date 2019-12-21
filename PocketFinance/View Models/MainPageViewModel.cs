@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using PocketFinance.Models;
 
 namespace PocketFinance.ViewModels
 {
@@ -9,12 +10,34 @@ namespace PocketFinance.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
         #region Properties
-        public static string newExpenseLabel = "New Expense";
-        public static string newIncomeLabel = "New Income";
+        private RecordBook _recordBook;
+        public RecordBook RecordBook
+        {
+            get { return _recordBook; }
+            set
+            {
+                _recordBook = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("RecordBook"));
+            }
+        }
+
+        public string newExpenseLabel
+        {
+            get { return "New Expense"; }
+        }
+        public string newIncomeLabel
+        {
+            get { return "New Income"; }
+        }
+        public string viewRecordsLabel
+        {
+            get { return "View Records"; }
+        }
         #endregion
 
-        public MainPageViewModel()
+        public MainPageViewModel(/*RecordBook recordBook*/)
         {
+            //RecordBook = recordBook;
         }
     }
 }
