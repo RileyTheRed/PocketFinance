@@ -172,14 +172,14 @@ namespace PocketFinance.ViewModels
                 return _submitRecordCommand;
             }
         }
-        public void SubmitClicked(object obj)
+        async public void SubmitClicked(object obj)
         {
             if (PickerCategoryColor.Equals("Wheat") &&
                 EntryAmountColor.Equals("Wheat") &&
                 DatePickerColor.Equals("Wheat"))
             {
                 recordBook.RecordList.Add(new Record(Double.Parse(Amount), SelectedDate, "expense", Category, "", false));
-                parentPage.DisplayAlert("Success", "Record added!", "Ok");
+                await parentPage.DisplayAlert("Success", "Record added!", "Ok");
                 Application.Current.MainPage = parentPage.parentPage;
             }
         }
@@ -194,6 +194,7 @@ namespace PocketFinance.ViewModels
             DatePickerColor = "Wheat";
             MaxDateValue = DateTime.Now;
             recordBook = book;
+            SelectedDate = DateTime.Now;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
