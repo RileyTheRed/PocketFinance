@@ -44,7 +44,8 @@
 
             <Button x:Name="btnNewIncome"
                     Text="{Binding newIncomeLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"/>
+                    BackgroundColor="Wheat" WidthRequest="200"
+                    Clicked="btnClicked_NewIncome"/>
 
             <Button x:Name="btnViewRecords"
                     Text="{Binding viewRecordsLabel}" TextColor="Black"
