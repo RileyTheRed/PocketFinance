@@ -9,7 +9,6 @@ namespace PocketFinance.Utilities
         // List of all the Expense categories
         private static List<string> defaultExpenseCategories = new List<string>()
         {
-            "Select a Category...",
             "Utilities",
             "Transportation",
             "Groceries",
@@ -25,7 +24,6 @@ namespace PocketFinance.Utilities
         // list of all the Income categories
         private static List<string> defaultIncomeCategories = new List<string>()
         {
-            "Select a Category...",
             "Wages and Salaries",
             "Interest Received",
             "Dividends",
@@ -35,7 +33,6 @@ namespace PocketFinance.Utilities
             "Unemployment Compensation",
             "Gambling Income"
         };
-
 
         // returns the list of Expense categories
         public static List<string> GetExpenseCategories()
