@@ -37,18 +37,11 @@
         <StackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Center"
                      Orientation="Vertical">
 
-            <Button x:Name="btnNewExpense"
-                    Text="{Binding newExpenseLabel}" TextColor="Black"
+            <Button Text="{Binding newRecordLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_NewExpense"/>
+                    Clicked="btnClicked_NewRecord"/>
 
-            <Button x:Name="btnNewIncome"
-                    Text="{Binding newIncomeLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_NewIncome"/>
-
-            <Button x:Name="btnViewRecords"
-                    Text="{Binding viewRecordsLabel}" TextColor="Black"
+            <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"/>
         </StackLayout>
 

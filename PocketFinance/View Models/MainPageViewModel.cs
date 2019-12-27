@@ -21,13 +21,9 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        public string newExpenseLabel
+        public string newRecordLabel
         {
-            get { return "New Expense"; }
-        }
-        public string newIncomeLabel
-        {
-            get { return "New Income"; }
+            get { return "New Record"; }
         }
         public string viewRecordsLabel
         {
