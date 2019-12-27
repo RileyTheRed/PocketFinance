@@ -1,5 +1,101 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PocketFinance.SearchRecordsPage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PocketFinance.SearchRecordsPage"
+    BackgroundColor="Gray">
+
+
+    <StackLayout Orientation="Vertical" Padding="40">
+
+        <Label Text="Select Search Criteria"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               TextColor="Wheat"
+               TextDecorations="Underline"/>
+
+        <!--stacklayout for search criteria inputs-->
+        <StackLayout Orientation="Vertical">
+
+            <!--stacklayout for record types-->
+            <StackLayout Orientation="Horizontal">
+                <!--stacklayout for expense checkbox and label-->
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="StartAndExpand">
+                    <CheckBox Color="Lime"
+                              Scale="0.7"/>
+                    <Label Text="Expense"
+                           TextColor="Wheat"
+                           FontSize="13"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+                </StackLayout>
+                <!--stacklayout for income checkbox and label-->
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="EndAndExpand">
+                    <CheckBox Color="Lime"
+                              Scale="0.7"/>
+                    <Label Text="Income"
+                           TextColor="Wheat"
+                           FontSize="13"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
+
+            <!--stacklayout for record date ranges-->
+            <StackLayout Orientation="Horizontal">
+                <!--range selection for last month-->
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="StartAndExpand">
+                    <CheckBox Color="Lime"
+                              Scale="0.6"/>
+                    <Label Text="Past Month"
+                           TextColor="Wheat"
+                           VerticalOptions="Center"
+                           FontSize="10"/>
+                </StackLayout>
+                <!--range selection for the last 3 months-->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox Color="Lime"
+                              Scale="0.6"/>
+                    <Label Text="Past 3 Months"
+                           TextColor="Wheat"
+                           FontSize="10"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+                <!--range selection for the last 6 months-->
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox Color="Lime"
+                              Scale="0.6"/>
+                    <Label Text="Past 6 Months"
+                           TextColor="Wheat"
+                           FontSize="10"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+            </StackLayout>
+
+            <!--stacklayout for record category selection-->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center">
+                <Picker HeightRequest="30"
+                        WidthRequest="100"
+                        BackgroundColor="Wheat"
+                        TextColor="Black"
+                        Title="Category..."/>
+            </StackLayout>
+
+        </StackLayout>
+
+        <!--listview stuff-->
+        <ListView ItemsSource="{Binding book.Records}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+
+
 </ContentPage>
