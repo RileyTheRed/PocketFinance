@@ -7,7 +7,11 @@ namespace PocketFinance.Models
     {
 
         #region Properties
-        public List<Record> RecordList;
+        public List<Record> RecordList
+        {
+            get;
+            set;
+        }
         #endregion
 
         public RecordBook()
