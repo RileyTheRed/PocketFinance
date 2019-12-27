@@ -24,13 +24,12 @@ namespace PocketFinance.Utilities
         // list of all the Income categories
         private static List<string> defaultIncomeCategories = new List<string>()
         {
-            "Wages and Salaries",
-            "Interest Received",
+            "Wages",
+            "Interest",
             "Dividends",
             "Business Income",
             "Capital Gains",
             "Rental Income",
-            "Unemployment Compensation",
             "Gambling Income"
         };
 
