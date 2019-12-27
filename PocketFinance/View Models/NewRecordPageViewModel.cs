@@ -9,11 +9,11 @@ using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels
 {
-    public class NewIncomePageViewModel : INotifyPropertyChanged
+    public class NewRecordPageViewModel : INotifyPropertyChanged
     {
 
         #region Properties
-        NewIncomePage parentPage;
+        NewRecordPage parentPage;
         RecordBook recordBook;
 
         private string _amount;
@@ -178,7 +178,7 @@ namespace PocketFinance.ViewModels
         {
             try
             {
-                recordAmount = Double.Parse(_amount);
+                _ = Double.Parse(_amount);
                 EntryAmountColor = "Green";
             }
             catch
@@ -278,7 +278,7 @@ namespace PocketFinance.ViewModels
         }
         #endregion
 
-        public NewIncomePageViewModel(NewIncomePage parent, RecordBook book)
+        public NewRecordPageViewModel(NewRecordPage parent, RecordBook book)
         {
             parentPage = parent;
             EntryAmountColor = "Wheat";

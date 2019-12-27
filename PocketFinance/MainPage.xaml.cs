@@ -27,12 +27,12 @@ namespace PocketFinance
 
         void btnClicked_NewExpense(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NewExpensePage(this, book);
+            //Application.Current.MainPage = new NewExpensePage(this, book);
         }
 
         void btnClicked_NewIncome(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NewIncomePage(this, book);
+            Application.Current.MainPage = new NewRecordPage(this, book);
         }
     }
 }
