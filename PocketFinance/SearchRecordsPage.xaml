@@ -87,10 +87,25 @@
         </StackLayout>
 
         <!--listview stuff-->
-        <ListView ItemsSource="{Binding book.Records}">
+        <ListView ItemsSource="{Binding recordBook.RecordList}"
+                  BackgroundColor="Wheat">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label Text="{Binding Date}"
+                                   FontSize="9"
+                                   TextColor="Black"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Amount}"
+                                       TextColor="Black"
+                                       FontSize="10"/>
+                                <Label Text="{Binding Category}"
+                                       TextColor="Black"
+                                       FontSize="10"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
