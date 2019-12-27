@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFinance.NewIncomePage"
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
+
+    
+
+    <Grid>
+
+        <!--Grid row and column defintions-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--end grid row and column defintions-->
+
+
+
+        <!--TOP LABEL-->
+        <Label Text="New Income"
+               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
+               Margin="0,20,0,0" TextColor="Wheat"/>
+        <!--END LABEL-->
+
+
+
+        <!--BUTTONS-->
+        <StackLayout Grid.Column="1"
+                     Grid.Row="1"
+                     HorizontalOptions="Center"
+                     Orientation="Vertical">
+
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.ColumnSpan="3"
+                           Grid.Row="0"
+                           Text="Type of Record?"
+                           TextColor="Wheat"
+                           FontSize="15"
+                           HorizontalTextAlignment="Center"/>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="0"
+                                 Orientation="Horizontal">
+                        <CheckBox Color="Lime"
+                                  VerticalOptions="Center"
+                                  Scale="0.9"
+                                  IsChecked="{Binding ExpenseChecked, Mode=TwoWay}"/>
+                        <Label Text="Expense"
+                               FontSize="13"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="2"
+                                 Orientation="Horizontal">
+                        <CheckBox Color="Lime"
+                                  VerticalOptions="Center"
+                                  Scale="0.9"
+                                  IsChecked="{Binding IncomeChecked, Mode=TwoWay}"/>
+                        <Label Text="Income"
+                               FontSize="13"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Amount:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+
+                <Entry BackgroundColor="{Binding EntryAmountColor}"
+                       WidthRequest="200"
+                       Placeholder="Enter Amount..."
+                       Text="{Binding Amount}">
+                    <Entry.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusAmount}"/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Category:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <Picker ItemsSource="{Binding ExpenseTypes}"
+                        SelectedIndex="{Binding CategoryIndex}"
+                        Title="Select a Category..."
+                        TextColor="Black"
+                        BackgroundColor="{Binding PickerCategoryColor}"
+                        WidthRequest="200">
+                    <Picker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusCategory}"/>
+                    </Picker.Behaviors>
+                </Picker>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Date:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <DatePicker TextColor="Black"
+                            Date="{Binding SelectedDate}"
+                            MaximumDate="{Binding MaxDateValue}"
+                            MinimumDate="{Binding MinDateValue}"
+                            BackgroundColor="{Binding DatePickerColor}"
+                            WidthRequest="200">
+                    <DatePicker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding LostFocusDate}"/>
+                    </DatePicker.Behaviors>
+                </DatePicker>
+            </StackLayout>
+
+            <Button Text="Submit Record"
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="200"
+                    Command="{Binding SubmitRecordCommand}"/>
+            
+            <Button Text="Back"
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="100"
+                    Command="{Binding BackClickedCommand}"/>
+
+        </StackLayout>
+
+    </Grid>
+
+</ContentPage>
