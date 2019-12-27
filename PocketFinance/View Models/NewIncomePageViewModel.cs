@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using PocketFinance.Models;
@@ -11,12 +12,9 @@ namespace PocketFinance.ViewModels
     public class NewIncomePageViewModel : INotifyPropertyChanged
     {
 
-
-
         #region Properties
         NewIncomePage parentPage;
         RecordBook recordBook;
-        private double recordAmount;
 
         private string _amount;
         public string Amount
@@ -40,6 +38,17 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private int _categoryIndex;
+        public int CategoryIndex
+        {
+            get { return _categoryIndex; }
+            set
+            {
+                _categoryIndex = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CategoryIndex"));
+            }
+        }
+
         private DateTime _selectedDate;
         public DateTime SelectedDate
         {
@@ -48,6 +57,48 @@ namespace PocketFinance.ViewModels
             {
                 _selectedDate = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedDate"));
+            }
+        }
+
+        private bool _expenseChecked;
+        public bool ExpenseChecked
+        {
+            get { return _expenseChecked; }
+            set
+            {
+                _expenseChecked = value;
+                if (value == true)
+                {
+                    ExpenseTypes = Categories.GetExpenseCategories();
+                    IncomeChecked = false;
+                }
+                else
+                {
+                    if (IncomeChecked == false)
+                        ExpenseTypes = new List<string>();
+                }
+                PropertyChanged(this, new PropertyChangedEventArgs("ExpenseChecked"));
+            }
+        }
+
+        private bool _incomeChecked;
+        public bool IncomeChecked
+        {
+            get { return _incomeChecked; }
+            set
+            {
+                _incomeChecked = value;
+                if (value == true)
+                {
+                    ExpenseTypes = Categories.GetIncomeCategories();
+                    ExpenseChecked = false;
+                }
+                else
+                {
+                    if (ExpenseChecked == false)
+                        ExpenseTypes = new List<string>();
+                }
+                PropertyChanged(this, new PropertyChangedEventArgs("IncomeChecked"));
             }
         }
 
@@ -98,15 +149,17 @@ namespace PocketFinance.ViewModels
             get { return DateTime.MinValue; }
         }
 
-        public List<string> expenseTypes
+        private List<string> _expenseTypes;
+        public List<string> ExpenseTypes
         {
-            get { return Categories.GetIncomeCategories(); }
+            get { return _expenseTypes; }
+            set
+            {
+                _expenseTypes = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ExpenseTypes"));
+             }
         }
         #endregion
-
-
-
-
 
         #region Commands
         public ICommand LostFocusAmount
@@ -126,11 +179,10 @@ namespace PocketFinance.ViewModels
             try
             {
                 recordAmount = Double.Parse(_amount);
-                EntryAmountColor = "Wheat";
+                EntryAmountColor = "Green";
             }
             catch
             {
-                parentPage.DisplayAlert("Invalid", "Invalid amout!", "Ok");
                 EntryAmountColor = "Salmon";
             }
         }
@@ -149,9 +201,8 @@ namespace PocketFinance.ViewModels
         DelegateCommand _lostFocusCategory;
         public void CategoryLostFocus(object obj)
         {
-            if (Category.Equals("Select a Category..."))
+            if (CategoryIndex == -1)
             {
-                parentPage.DisplayAlert("Alert", "Invalid Category!", "Ok");
                 PickerCategoryColor = "Salmon";
             }
             else
@@ -160,7 +211,6 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        DelegateCommand _submitRecordCommand;
         public ICommand SubmitRecordCommand
         {
             get
@@ -172,29 +222,75 @@ namespace PocketFinance.ViewModels
                 return _submitRecordCommand;
             }
         }
+        DelegateCommand _submitRecordCommand;
         async public void SubmitClicked(object obj)
         {
-            if (PickerCategoryColor.Equals("Wheat") &&
-                EntryAmountColor.Equals("Wheat") &&
-                DatePickerColor.Equals("Wheat"))
+            if (CategoryIndex != -1 &&
+                EntryAmountColor.Equals("Green") &&
+                SelectedDate != MinDateValue)
             {
-                recordBook.RecordList.Add(new Record(Double.Parse(Amount), SelectedDate, "income", Category, "", false));
-                await parentPage.DisplayAlert("Success", "Record added!", "Ok");
-                Application.Current.MainPage = parentPage.parentPage;
+                string recordType = IncomeChecked ? "income" : "expense";
+                recordBook.RecordList.Add(
+                    new Record(Double.Parse(Amount), SelectedDate, recordType, ExpenseTypes[CategoryIndex], "", false)
+                    );
+                var response = await parentPage.DisplayAlert("Success!", "Record added! Want to add another?",
+                    "Yes", "No, I'm Done");
+                if (!response)
+                {
+                    Application.Current.MainPage = parentPage.parentPage;
+                }
+                else
+                {
+                    Amount = "";
+                    CategoryIndex = -1;
+                    SelectedDate = MaxDateValue;
+
+                    EntryAmountColor = "Wheat";
+                    PickerCategoryColor = "Wheat";
+                    DatePickerColor = "Wheat";
+                }
             }
+            else
+            {
+                await parentPage.DisplayAlert(
+                    "Error!",
+                    "Please check the information input and make sure that a record type has been selected.",
+                    "Ok"
+                    );
+            }
+        }
+
+        public ICommand BackClickedCommand
+        {
+            get
+            {
+                if (_backClickedCommand == null)
+                {
+                    _backClickedCommand = new DelegateCommand(BackButtonClicked);
+                }
+                return _backClickedCommand;
+            }
+        }
+        DelegateCommand _backClickedCommand;
+        public void BackButtonClicked(object obj)
+        {
+            Application.Current.MainPage = parentPage.parentPage;
         }
         #endregion
 
         public NewIncomePageViewModel(NewIncomePage parent, RecordBook book)
         {
             parentPage = parent;
-            Category = "Select a Category...";
             EntryAmountColor = "Wheat";
             PickerCategoryColor = "Wheat";
             DatePickerColor = "Wheat";
             MaxDateValue = DateTime.Now;
             SelectedDate = DateTime.Now;
             recordBook = book;
+            IncomeChecked = false;
+            ExpenseChecked = false;
+            ExpenseTypes = new List<string>();
+            CategoryIndex = -1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

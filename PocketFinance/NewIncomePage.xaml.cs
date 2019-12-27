@@ -19,10 +19,5 @@ namespace PocketFinance
             viewModel = new NewIncomePageViewModel(this, book);
             BindingContext = viewModel;
         }
-
-        void btnClicked_ReturnButton(object sender, EventArgs e)
-        {
-            Application.Current.MainPage = parentPage;
-        }
     }
 }

@@ -12,21 +12,21 @@
         <!--Grid row and column defintions-->
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--end grid row and column defintions-->
 
 
 
         <!--TOP LABEL-->
-        <Label Text="New Expense"
+        <Label Text="New Income"
                Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
                Margin="0,20,0,0" TextColor="Wheat"/>
         <!--END LABEL-->
@@ -38,6 +38,50 @@
                      Grid.Row="1"
                      HorizontalOptions="Center"
                      Orientation="Vertical">
+
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.ColumnSpan="3"
+                           Grid.Row="0"
+                           Text="Type of Record?"
+                           TextColor="Wheat"
+                           FontSize="15"
+                           HorizontalTextAlignment="Center"/>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="0"
+                                 Orientation="Horizontal">
+                        <CheckBox Color="Lime"
+                                  VerticalOptions="Center"
+                                  Scale="0.9"
+                                  IsChecked="{Binding ExpenseChecked, Mode=TwoWay}"/>
+                        <Label Text="Expense"
+                               FontSize="13"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="2"
+                                 Orientation="Horizontal">
+                        <CheckBox Color="Lime"
+                                  VerticalOptions="Center"
+                                  Scale="0.9"
+                                  IsChecked="{Binding IncomeChecked, Mode=TwoWay}"/>
+                        <Label Text="Income"
+                               FontSize="13"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+
+                </Grid>
+            </StackLayout>
 
             <StackLayout Orientation="Horizontal">
                 <Label Text="Amount:"
@@ -62,9 +106,9 @@
                        FontSize="13"
                        WidthRequest="75"
                        VerticalTextAlignment="Center"/>
-                <Picker ItemsSource="{Binding expenseTypes}"
-                        SelectedItem="{Binding Category}"
-                        SelectedIndex="1"
+                <Picker ItemsSource="{Binding ExpenseTypes}"
+                        SelectedIndex="{Binding CategoryIndex}"
+                        Title="Select a Category..."
                         TextColor="Black"
                         BackgroundColor="{Binding PickerCategoryColor}"
                         WidthRequest="200">
@@ -95,11 +139,18 @@
                 </DatePicker>
             </StackLayout>
 
-            <Button Text="Submit Income"
+            <Button Text="Submit Record"
                     TextColor="Black"
                     BackgroundColor="Wheat"
                     WidthRequest="200"
                     Command="{Binding SubmitRecordCommand}"/>
+            
+            <Button Text="Back"
+                    TextColor="Black"
+                    BackgroundColor="Wheat"
+                    WidthRequest="100"
+                    Command="{Binding BackClickedCommand}"/>
+
         </StackLayout>
 
     </Grid>
