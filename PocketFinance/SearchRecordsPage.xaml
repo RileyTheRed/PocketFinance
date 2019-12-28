@@ -6,7 +6,19 @@
     BackgroundColor="Gray">
 
 
-    <StackLayout Orientation="Vertical" Padding="40">
+    <StackLayout Orientation="Vertical">
+
+        <StackLayout Orientation="Horizontal"
+                     HeightRequest="60"
+                     BackgroundColor="Wheat"
+                     Margin="0,0,0,10">
+            <Button Text="Back"
+                    TextColor="Black"
+                    VerticalOptions="End"
+                    Padding="20"
+                    FontSize="10"
+                    Command="{Binding BackClickedCommand}"/>
+        </StackLayout>
 
         <Label Text="Select Search Criteria"
                VerticalOptions="Center"
@@ -15,7 +27,8 @@
                TextDecorations="Underline"/>
 
         <!--stacklayout for search criteria inputs-->
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical"
+                     Margin="40,0,40,40">
 
             <!--stacklayout for record types-->
             <StackLayout Orientation="Horizontal">
@@ -23,7 +36,8 @@
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="StartAndExpand">
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding ExpenseChecked}"/>
                     <Label Text="Expense"
                            TextColor="Wheat"
                            FontSize="13"
@@ -34,7 +48,8 @@
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="EndAndExpand">
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding IncomeChecked}"/>
                     <Label Text="Income"
                            TextColor="Wheat"
                            FontSize="13"
@@ -48,7 +63,8 @@
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="StartAndExpand">
                     <CheckBox Color="Lime"
-                              Scale="0.6"/>
+                              Scale="0.6"
+                              IsChecked="{Binding PastMonthChecked}"/>
                     <Label Text="Past Month"
                            TextColor="Wheat"
                            VerticalOptions="Center"
@@ -57,7 +73,8 @@
                 <!--range selection for the last 3 months-->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="Lime"
-                              Scale="0.6"/>
+                              Scale="0.6"
+                              IsChecked="{Binding PastThreeMonthChecked}"/>
                     <Label Text="Past 3 Months"
                            TextColor="Wheat"
                            FontSize="10"
@@ -66,7 +83,8 @@
                 <!--range selection for the last 6 months-->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="Lime"
-                              Scale="0.6"/>
+                              Scale="0.6"
+                              IsChecked="{Binding PastSixMonthChecked}"/>
                     <Label Text="Past 6 Months"
                            TextColor="Wheat"
                            FontSize="10"
@@ -76,24 +94,29 @@
 
             <!--stacklayout for record category selection-->
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="Center">
-                <Picker HeightRequest="30"
+                         HorizontalOptions="CenterAndExpand">
+                <Picker HeightRequest="10"
                         WidthRequest="100"
                         BackgroundColor="Wheat"
                         TextColor="Black"
                         Title="Category..."/>
+                <Button Text="Search"
+                        TextColor="Black"
+                        BackgroundColor="Wheat"
+                        WidthRequest="70"/>
             </StackLayout>
 
         </StackLayout>
 
         <!--listview stuff-->
         <ListView ItemsSource="{Binding recordBook.RecordList}"
-                  BackgroundColor="Wheat">
+                  BackgroundColor="Wheat"
+                  Margin="30,0,30,30">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Vertical">
-                            <Label Text="{Binding Date}"
+                            <Label Text="{Binding Date, StringFormat='{0:MM/dd/yyyy}'}"
                                    FontSize="9"
                                    TextColor="Black"/>
                             <StackLayout Orientation="Horizontal">

@@ -9,13 +9,12 @@ namespace PocketFinance
     public partial class SearchRecordsPage : ContentPage
     {
 
-        MainPage parentPage;
-        //SearchRecordsPageViewModel viewModel;
+        public MainPage parentPage;
 
         public SearchRecordsPage(MainPage parent, RecordBook book)
         {
             InitializeComponent();
-            //viewModel = new SearchRecordsPageViewModel(this, book);
+            parentPage = parent;
             BindingContext = new SearchRecordsPageViewModel(this, book);
         }
     }
