@@ -99,17 +99,21 @@
                         WidthRequest="100"
                         BackgroundColor="Wheat"
                         TextColor="Black"
-                        Title="Category..."/>
+                        Title="Category..."
+                        ItemsSource="{Binding AvailCategories}"
+                        SelectedIndex="{Binding SelectedCategory}"
+                        FontSize="12"/>
                 <Button Text="Search"
                         TextColor="Black"
                         BackgroundColor="Wheat"
-                        WidthRequest="70"/>
+                        WidthRequest="70"
+                        Command="{Binding SearchClickedCommand}"/>
             </StackLayout>
 
         </StackLayout>
 
         <!--listview stuff-->
-        <ListView ItemsSource="{Binding recordBook.RecordList}"
+        <ListView ItemsSource="{Binding SearchResult}"
                   BackgroundColor="Wheat"
                   Margin="30,0,30,30">
             <ListView.ItemTemplate>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using PocketFinance.Models;
+using PocketFinance.Utilities;
 using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels
@@ -18,6 +19,28 @@ namespace PocketFinance.ViewModels
             set;
         }
 
+        private List<string> _availCategories;
+        public List<string> AvailCategories
+        {
+            get { return _availCategories; }
+            set
+            {
+                _availCategories = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("AvailCategories"));
+            }
+        }
+
+        private int _selectedCategory;
+        public int SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                _selectedCategory = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCategory"));
+            }
+        }
+
         private bool _expenseChecked;
         public bool ExpenseChecked
         {
@@ -29,6 +52,7 @@ namespace PocketFinance.ViewModels
                 {
                     IncomeChecked = false;
                 }
+                SetCategories(value, IncomeChecked);
                 PropertyChanged(this, new PropertyChangedEventArgs("ExpenseChecked"));
             }
         }
@@ -44,6 +68,7 @@ namespace PocketFinance.ViewModels
                 {
                     ExpenseChecked = false;
                 }
+                SetCategories(ExpenseChecked, value);
                 PropertyChanged(this, new PropertyChangedEventArgs("IncomeChecked"));
             }
         }
@@ -96,14 +121,14 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        private List<Record> _searchResults;
-        public List<Record> SearchResults
+        private List<Record> _searchResult;
+        public List<Record> SearchResult
         {
-            get { return _searchResults; }
+            get { return _searchResult; }
             set
             {
-                _searchResults = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("SearchResults"));
+                _searchResult = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchResult"));
             }
         }
         #endregion
@@ -125,6 +150,24 @@ namespace PocketFinance.ViewModels
         {
             Application.Current.MainPage = parentPage.parentPage;
         }
+
+        public ICommand SearchClickedCommand
+        {
+            get
+            {
+                if (_searchClickedCommand == null)
+                {
+                    _searchClickedCommand = new DelegateCommand(SearchButtonClicked);
+                }
+                return _searchClickedCommand;
+            }
+        }
+        DelegateCommand _searchClickedCommand;
+        public void SearchButtonClicked(object obj)
+        {
+            SearchResult = SearchResults.GetSearchResults(ExpenseChecked, IncomeChecked, PastMonthChecked,
+                PastThreeMonthChecked, PastSixMonthChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
+        }
         #endregion
 
         public SearchRecordsPageViewModel(SearchRecordsPage parent, RecordBook book)
@@ -136,9 +179,37 @@ namespace PocketFinance.ViewModels
             PastMonthChecked = false;
             PastThreeMonthChecked = false;
             PastSixMonthChecked = false;
+            SearchResult = new List<Record>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        #region Helper
+        private void SetCategories(bool eChecked, bool iChecked)
+        {
+            if (eChecked)
+            {
+                AvailCategories = Categories.GetExpenseCategories();
+            }
+            else if (iChecked)
+            {
+                AvailCategories = Categories.GetIncomeCategories();
+            }
+            else
+            {
+                var temp = new List<string>();
+                foreach (string item in Categories.GetExpenseCategories())
+                {
+                    temp.Add(item);
+                }
+                foreach (string item in Categories.GetIncomeCategories())
+                {
+                    temp.Add(item);
+                }
+                AvailCategories = temp;
+            }
+        }
+        #endregion
 
     }
 }
