@@ -131,6 +131,20 @@ namespace PocketFinance.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs("SearchResult"));
             }
         }
+
+        private Record _selectedListItem;
+        public Record SelectedListItem
+        {
+            get { return _selectedListItem; }
+            set
+            {
+                _selectedListItem = value;
+                if (value != null)
+                {
+                    parentPage.ViewSelectedRecord(value);
+                }
+            }
+        }
         #endregion
 
         #region Commands

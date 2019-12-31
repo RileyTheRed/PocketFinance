@@ -115,7 +115,8 @@
         <!--listview stuff-->
         <ListView ItemsSource="{Binding SearchResult}"
                   BackgroundColor="Wheat"
-                  Margin="30,0,30,30">
+                  Margin="30,0,30,30"
+                  SelectedItem="{Binding SelectedListItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
