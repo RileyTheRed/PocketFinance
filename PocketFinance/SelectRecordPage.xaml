@@ -15,7 +15,8 @@
             <Button Text="Back"
                     TextColor="Black"
                     Padding="10"
-                    VerticalOptions="End"/>
+                    VerticalOptions="End"
+                    Command="{Binding BackClickedCommand}"/>
 
         </StackLayout>
 
@@ -36,7 +37,8 @@
                              HorizontalOptions="StartAndExpand">
 
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding ExpenseChecked}"/>
 
                     <Label Text="Expense"
                            TextColor="Wheat"
@@ -47,7 +49,8 @@
                 <StackLayout Orientation="Horizontal">
 
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding IncomeChecked}"/>
 
                     <Label Text="Income"
                            TextColor="Wheat"
@@ -68,7 +71,8 @@
 
                 <Entry WidthRequest="200"
                        BackgroundColor="Wheat"
-                       Placeholder="Amount..."/>
+                       Placeholder="Amount..."
+                       Text="{Binding Amount}"/>
 
             </StackLayout>
 
@@ -82,7 +86,8 @@
 
                 <Picker WidthRequest="200"
                         BackgroundColor="Wheat"
-                        Title="Category..."/>
+                        Title="Category..."
+                        SelectedItem="{Binding Category}"/>
 
             </StackLayout>
 
@@ -95,7 +100,8 @@
                        VerticalOptions="Center"/>
 
                 <DatePicker WidthRequest="200"
-                            BackgroundColor="Wheat"/>
+                            BackgroundColor="Wheat"
+                            Date="{Binding Date}"/>
 
             </StackLayout>
 
