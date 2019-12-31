@@ -46,7 +46,21 @@ namespace PocketFinance.Utilities
             // then look at whether a specific time frame was selected
             if (isLastMonthChecked)
             {
-                //temp = temp.Where(record => record.Date.)
+                temp = temp.Where(record => DateTime.Now.AddMonths(-1) <= record.Date).ToList();
+            }
+            else if (isLastThreeMonthChecked)
+            {
+                temp = temp.Where(record => DateTime.Now.AddMonths(-3) <= record.Date).ToList();
+            }
+            else if (isLastSixMonthChecked)
+            {
+                temp = temp.Where(record => DateTime.Now.AddMonths(-6) <= record.Date).ToList();
+            }
+
+            // then look to see if a category was specified
+            if (selectedCategoryIndex >= 0)
+            {
+                temp = temp.Where(record => record.Category.Equals(availableCategories[selectedCategoryIndex])).ToList();
             }
 
             return temp;
