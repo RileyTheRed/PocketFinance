@@ -42,7 +42,8 @@
                     Clicked="btnClicked_NewRecord"/>
 
             <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"/>
+                    BackgroundColor="Wheat" WidthRequest="200"
+                    Clicked="btnClicked_ViewRecords"/>
         </StackLayout>
 
     </Grid>
