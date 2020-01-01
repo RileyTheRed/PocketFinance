@@ -194,6 +194,7 @@ namespace PocketFinance.ViewModels
             PastThreeMonthChecked = false;
             PastSixMonthChecked = false;
             SearchResult = new List<Record>();
+            SelectedCategory = -1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

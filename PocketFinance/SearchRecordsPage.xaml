@@ -116,7 +116,8 @@
         <ListView ItemsSource="{Binding SearchResult}"
                   BackgroundColor="Wheat"
                   Margin="30,0,30,30"
-                  SelectedItem="{Binding SelectedListItem}">
+                  SelectedItem="{Binding SelectedListItem}"
+                  IsPullToRefreshEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
