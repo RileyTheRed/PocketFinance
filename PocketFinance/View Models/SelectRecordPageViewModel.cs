@@ -26,14 +26,26 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        private string _category;
-        public string Category
+        //private string _category;
+        //public string Category
+        //{
+        //    get { return _category; }
+        //    set
+        //    {
+        //        _category = value;
+        //        PropertyChanged(this, new PropertyChangedEventArgs("Category"));
+        //    }
+        //}
+
+        private int _selectedCategoryIndex;
+        public int SelectedCategoryIndex
         {
-            get { return _category; }
+            get { return _selectedCategoryIndex; }
             set
             {
-                _category = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("Category"));
+                _selectedCategoryIndex = value;
+                Console.Out.WriteLine("SelectedCategoryIndexChanged");
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCategoryIndex"));
             }
         }
 
@@ -60,6 +72,7 @@ namespace PocketFinance.ViewModels
                     IncomeChecked = false;
                 }
                 GetAvailableCategories(value, IncomeChecked);
+                Console.Out.WriteLine("ExpenseChecked - Called GetAvailableCategories()");
                 PropertyChanged(this, new PropertyChangedEventArgs("ExpenseChecked"));
             }
         }
@@ -76,6 +89,7 @@ namespace PocketFinance.ViewModels
                     ExpenseChecked = false;
                 }
                 GetAvailableCategories(ExpenseChecked, value);
+                Console.Out.WriteLine("IncomeChecked - Called GetAvailableCategories()");
                 PropertyChanged(this, new PropertyChangedEventArgs("IncomeChecked"));
             }
         }
@@ -109,6 +123,25 @@ namespace PocketFinance.ViewModels
         {
             Application.Current.MainPage = parentPage.parentPage;
         }
+
+        public ICommand DeleteClickedCommand
+        {
+            get
+            {
+                if (_deleteClickedCommand == null)
+                {
+                    _deleteClickedCommand = new DelegateCommand(DeleteButtonClicked);
+                }
+                return _deleteClickedCommand;
+            }
+        }
+        DelegateCommand _deleteClickedCommand;
+        public void DeleteButtonClicked(object obj)
+        {
+            // below was used to test to see if changing the SelectedCategoryIndex
+            // actually changed the picker selection...
+            //SelectedCategoryIndex = 2;
+        }
         #endregion
 
         public SelectRecordPageViewModel(SelectRecordPage parent, Record record)
@@ -121,7 +154,15 @@ namespace PocketFinance.ViewModels
                 ExpenseChecked = true;
             else
                 IncomeChecked = true;
-            Category = this.record.Category;
+
+            //for (int i = 0; i < AvailCategories.Count; i++)
+            //{
+            //    if (AvailCategories[i].Equals(record.Category))
+            //    {
+            //        SelectedCategoryIndex = i;
+            //        break;
+            //    }
+            //}
         }
 
         private void GetAvailableCategories(bool eChecked, bool iChecked)
@@ -137,6 +178,15 @@ namespace PocketFinance.ViewModels
             else
             {
                 AvailCategories = new List<string>();
+            }
+
+            for (int i = 0; i < AvailCategories.Count; i++)
+            {
+                if (AvailCategories[i].Equals(record.Category))
+                {
+                    SelectedCategoryIndex = i;
+                    break;
+                }
             }
         }
 

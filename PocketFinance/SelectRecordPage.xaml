@@ -87,7 +87,8 @@
                 <Picker WidthRequest="200"
                         BackgroundColor="Wheat"
                         Title="Category..."
-                        SelectedItem="{Binding Category}"/>
+                        SelectedIndex="{Binding SelectedCategoryIndex}"
+                        ItemsSource="{Binding AvailCategories}"/>
 
             </StackLayout>
 
@@ -113,7 +114,8 @@
                         TextColor="Black"
                         BackgroundColor="Wheat"
                         WidthRequest="100"
-                        HorizontalOptions="StartAndExpand"/>
+                        HorizontalOptions="StartAndExpand"
+                        Command="{Binding DeleteClickedCommand}"/>
 
                 <Button Text="Save Changes"
                         TextColor="Black"
