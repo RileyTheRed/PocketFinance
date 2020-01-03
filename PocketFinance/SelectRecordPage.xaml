@@ -136,7 +136,7 @@
             <StackLayout Orientation="Horizontal"
                          Margin="0,30,0,0">
 
-                <Button Text="Delete"
+                <Button Text="{Binding DeletedButtonText}"
                         TextColor="Black"
                         BackgroundColor="Wheat"
                         WidthRequest="100"
