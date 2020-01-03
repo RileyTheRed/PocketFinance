@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFinance.SelectRecordPage"
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
+
+    <!--master stacklayout-->
+    <StackLayout Orientation="Vertical">
+
+        <!--back button stacklayout-->
+        <StackLayout Orientation="Horizontal"
+                     BackgroundColor="Wheat"
+                     HeightRequest="60">
+
+            <Button Text="Back"
+                    TextColor="Black"
+                    Padding="10"
+                    VerticalOptions="End"
+                    Command="{Binding BackClickedCommand}"/>
+
+        </StackLayout>
+
+        <!--main stacklayout-->
+        <StackLayout Orientation="Vertical"
+                     Padding="40">
+
+            <Label Text="Selected Record"
+                   HorizontalOptions="Center"
+                   TextColor="Wheat"
+                   TextDecorations="Underline"/>
+
+            <!--record type checkbox stacklayout-->
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,40,0,0">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="StartAndExpand">
+
+                    <CheckBox Color="Lime"
+                              Scale="0.7"
+                              IsChecked="{Binding ExpenseChecked}">
+                        <CheckBox.Behaviors>
+                            <behavior:EventToCommandBehavior
+                                EventName="CheckedChanged"
+                                Command="{Binding ExpenseChangedChanged}"/>
+                        </CheckBox.Behaviors>
+                    </CheckBox>
+
+                    <Label Text="Expense"
+                           TextColor="Wheat"
+                           VerticalOptions="Center"/>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+
+                    <CheckBox Color="Lime"
+                              Scale="0.7"
+                              IsChecked="{Binding IncomeChecked}">
+                        <CheckBox.Behaviors>
+                            <behavior:EventToCommandBehavior
+                                EventName="CheckedChanged"
+                                Command="{Binding IncomeCheckedChanged}"/>
+                        </CheckBox.Behaviors>
+                    </CheckBox>
+
+                    <Label Text="Income"
+                           TextColor="Wheat"
+                           VerticalOptions="Center"/>
+
+                </StackLayout>
+
+            </StackLayout>
+
+            <!--record amount stacklayout-->
+            <StackLayout Orientation="Horizontal"
+                Margin="0,0,0,0">
+
+                <Label Text="Amount:"
+                       TextColor="Wheat"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"/>
+
+                <Entry WidthRequest="200"
+                       BackgroundColor="{Binding AmountColor}"
+                       Placeholder="Amount..."
+                       Text="{Binding Amount}">
+                    <Entry.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding AmountLostFocus}"/>
+                    </Entry.Behaviors>
+                </Entry>
+
+            </StackLayout>
+
+            <!--record category stacklayout-->
+            <StackLayout Orientation="Horizontal">
+
+                <Label Text="Category:"
+                       TextColor="Wheat"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"/>
+
+                <Picker WidthRequest="200"
+                        BackgroundColor="{Binding CategoryColor}"
+                        Title="Category..."
+                        SelectedIndex="{Binding SelectedCategoryIndex}"
+                        ItemsSource="{Binding AvailCategories}">
+                    <Picker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding CategoryLostFocus}"/>
+                    </Picker.Behaviors>
+                </Picker>
+
+            </StackLayout>
+
+            <!--record date stacklayout-->
+            <StackLayout Orientation="Horizontal">
+
+                <Label Text="Date:"
+                       TextColor="Wheat"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalOptions="Center"/>
+
+                <DatePicker WidthRequest="200"
+                            BackgroundColor="Wheat"
+                            Date="{Binding Date}"
+                            MaximumDate="{Binding MaxDateValue}"/>
+
+            </StackLayout>
+
+            <!--delete and save button stacklayout-->
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,30,0,0">
+
+                <Button Text="Delete"
+                        TextColor="Black"
+                        BackgroundColor="Wheat"
+                        WidthRequest="100"
+                        HorizontalOptions="StartAndExpand"
+                        Command="{Binding DeleteClickedCommand}"/>
+
+                <Button Text="Save Changes"
+                        TextColor="Black"
+                        BackgroundColor="Wheat"
+                        WidthRequest="130"
+                        IsEnabled="{Binding SubmitEnabled}"
+                        Command="{Binding SubmitClickedCommand}"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </StackLayout>
+
+</ContentPage>
