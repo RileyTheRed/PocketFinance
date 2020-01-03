@@ -26,6 +26,7 @@ namespace PocketFinance.Utilities
             bool isLastMonthChecked,
             bool isLastThreeMonthChecked,
             bool isLastSixMonthChecked,
+            bool isDeletedChecked,
             int selectedCategoryIndex,
             List<string> availableCategories,
             List<Record> allRecords)
@@ -58,6 +59,15 @@ namespace PocketFinance.Utilities
             else if (isLastSixMonthChecked)
             {
                 temp = temp.Where(record => DateTime.Now.AddMonths(-6) <= record.Date).ToList();
+            }
+
+            if (isDeletedChecked)
+            {
+                temp = temp.Where(record => record.IsDeleted).ToList();
+            }
+            else if (!isDeletedChecked)
+            {
+                temp = temp.Where(record => !record.IsDeleted).ToList();
             }
 
             // then look to see if a category was specified

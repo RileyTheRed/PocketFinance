@@ -17,7 +17,14 @@
                     VerticalOptions="End"
                     Padding="20"
                     FontSize="10"
-                    Command="{Binding BackClickedCommand}"/>
+                    Command="{Binding BackClickedCommand}"
+                    HorizontalOptions="StartAndExpand"/>
+            <Button Text="Clear"
+                    TextColor="Black"
+                    VerticalOptions="End"
+                    Padding="20"
+                    FontSize="10"
+                    Command="{Binding ClearClickedCommand}"/>
         </StackLayout>
 
         <Label Text="Select Search Criteria"
@@ -63,7 +70,7 @@
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="StartAndExpand">
                     <CheckBox Color="Lime"
-                              Scale="0.6"
+                              Scale="0.7"
                               IsChecked="{Binding PastMonthChecked}"/>
                     <Label Text="Past Month"
                            TextColor="Wheat"
@@ -73,7 +80,7 @@
                 <!--range selection for the last 3 months-->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="Lime"
-                              Scale="0.6"
+                              Scale="0.7"
                               IsChecked="{Binding PastThreeMonthChecked}"/>
                     <Label Text="Past 3 Months"
                            TextColor="Wheat"
@@ -83,7 +90,7 @@
                 <!--range selection for the last 6 months-->
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="Lime"
-                              Scale="0.6"
+                              Scale="0.7"
                               IsChecked="{Binding PastSixMonthChecked}"/>
                     <Label Text="Past 6 Months"
                            TextColor="Wheat"
@@ -94,7 +101,15 @@
 
             <!--stacklayout for record category selection-->
             <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="CenterAndExpand">
+                         HorizontalOptions="StartAndExpand">
+                <CheckBox Color="Lime"
+                          Scale="0.7"
+                          IsChecked="{Binding DeletedChecked}"/>
+                <Label Text="Deleted"
+                       TextColor="Wheat"
+                       FontSize="11"
+                       VerticalOptions="Center"
+                       Margin="0,0,20,0"/>
                 <Picker HeightRequest="10"
                         WidthRequest="100"
                         BackgroundColor="Wheat"
