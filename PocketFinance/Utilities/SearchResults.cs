@@ -76,6 +76,8 @@ namespace PocketFinance.Utilities
                 temp = temp.Where(record => record.Category.Equals(availableCategories[selectedCategoryIndex])).ToList();
             }
 
+            temp = temp.OrderByDescending(record => record.Date).ToList();
+
             return temp;
 
         }
