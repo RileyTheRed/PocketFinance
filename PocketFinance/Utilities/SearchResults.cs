@@ -31,7 +31,10 @@ namespace PocketFinance.Utilities
             List<Record> allRecords)
         {
 
-            List<Record> temp = allRecords;
+            //List<Record> temp = allRecords;
+            List<Record> temp = new List<Record>();
+            foreach (Record item in allRecords)
+                temp.Add(item);
 
             // start off by looking at whether we are needing expense or income records
             if (isExpenseChecked)
