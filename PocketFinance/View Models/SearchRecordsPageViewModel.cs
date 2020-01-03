@@ -121,6 +121,17 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private bool _deletedChecked;
+        public bool DeletedChecked
+        {
+            get { return _deletedChecked; }
+            set
+            {
+                _deletedChecked = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("DeletedChecked"));
+            }
+        }
+
         private List<Record> _searchResult;
         public List<Record> SearchResult
         {
@@ -181,7 +192,29 @@ namespace PocketFinance.ViewModels
         public void SearchButtonClicked(object obj)
         {
             SearchResult = SearchResults.GetSearchResults(ExpenseChecked, IncomeChecked, PastMonthChecked,
-                PastThreeMonthChecked, PastSixMonthChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
+                PastThreeMonthChecked, PastSixMonthChecked, DeletedChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
+        }
+
+        public ICommand ClearClickedCommand
+        {
+            get
+            {
+                if (_clearClickedCommand == null)
+                {
+                    _clearClickedCommand = new DelegateCommand(ClearButtonClicked);
+                }
+                return _clearClickedCommand;
+            }
+        }
+        DelegateCommand _clearClickedCommand;
+        public void ClearButtonClicked(object obj)
+        {
+            ExpenseChecked = false;
+            IncomeChecked = false;
+            PastMonthChecked = false;
+            PastThreeMonthChecked = false;
+            PastSixMonthChecked = false;
+            DeletedChecked = false;
         }
         #endregion
 
@@ -194,6 +227,7 @@ namespace PocketFinance.ViewModels
             PastMonthChecked = false;
             PastThreeMonthChecked = false;
             PastSixMonthChecked = false;
+            DeletedChecked = false;
             SearchResult = new List<Record>();
             SelectedCategory = -1;
         }
@@ -202,7 +236,7 @@ namespace PocketFinance.ViewModels
         {
             SelectedListItem = null;
             SearchResult = SearchResults.GetSearchResults(ExpenseChecked, IncomeChecked, PastMonthChecked,
-                PastThreeMonthChecked, PastSixMonthChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
+                PastThreeMonthChecked, PastSixMonthChecked, DeletedChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

@@ -15,6 +15,17 @@ namespace PocketFinance.ViewModels
         SelectRecordPage parentPage;
         Record record;
 
+        private string _deletedButtonText;
+        public string DeletedButtonText
+        {
+            get { return _deletedButtonText; }
+            set
+            {
+                _deletedButtonText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("DeletedButtonText"));
+            }
+        }
+
         private string _amount;
         public string Amount
         {
@@ -268,18 +279,37 @@ namespace PocketFinance.ViewModels
         DelegateCommand _deleteClickedCommand;
         async public void DeleteButtonClicked(object obj)
         {
-            var response =
-                await parentPage.DisplayAlert("Confirm", "Are you sure you want to delete the record?",
-                "Yes", "No");
-            if (response)
+            if (DeletedButtonText.Equals("Delete"))
             {
-                record.IsDeleted = true;
-                parentPage.parentPage.vm.Refresh();
-                Application.Current.MainPage = parentPage.parentPage;
+                var response =
+                    await parentPage.DisplayAlert("Confirm", "Are you sure you want to delete the record?",
+                    "Yes", "No");
+                if (response)
+                {
+                    record.IsDeleted = true;
+                    parentPage.parentPage.vm.Refresh();
+                    Application.Current.MainPage = parentPage.parentPage;
+                }
+                else
+                {
+                    Application.Current.MainPage = parentPage.parentPage;
+                }
             }
             else
             {
-                Application.Current.MainPage = parentPage.parentPage;
+                var response =
+                    await parentPage.DisplayAlert("Confirm", "Are you sure you want to reinstate the record?",
+                    "Yes", "No");
+                if (response)
+                {
+                    record.IsDeleted = false;
+                    parentPage.parentPage.vm.Refresh();
+                    Application.Current.MainPage = parentPage.parentPage;
+                }
+                else
+                {
+                    Application.Current.MainPage = parentPage.parentPage;
+                }
             }
 
         }
@@ -340,6 +370,15 @@ namespace PocketFinance.ViewModels
                 IncomeChecked = true;
             }
             SubmitEnabled = false;
+
+            if (record.IsDeleted)
+            {
+                DeletedButtonText = "Reinstate";
+            }
+            else
+            {
+                DeletedButtonText = "Delete";
+            }
         }
 
         private void GetAvailableCategories(bool eChecked, bool iChecked)
