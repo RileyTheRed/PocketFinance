@@ -10,12 +10,14 @@ namespace PocketFinance
     {
 
         public MainPage parentPage;
+        public SearchRecordsPageViewModel vm;
 
         public SearchRecordsPage(MainPage parent, RecordBook book)
         {
             InitializeComponent();
             parentPage = parent;
-            BindingContext = new SearchRecordsPageViewModel(this, book);
+            vm = new SearchRecordsPageViewModel(this, book);
+            BindingContext = vm;
         }
 
         public void ViewSelectedRecord(Record record)

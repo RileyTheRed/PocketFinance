@@ -143,6 +143,7 @@ namespace PocketFinance.ViewModels
                 {
                     parentPage.ViewSelectedRecord(value);
                 }
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedListItem"));
             }
         }
         #endregion
@@ -195,6 +196,13 @@ namespace PocketFinance.ViewModels
             PastSixMonthChecked = false;
             SearchResult = new List<Record>();
             SelectedCategory = -1;
+        }
+
+        public void Refresh()
+        {
+            SelectedListItem = null;
+            SearchResult = SearchResults.GetSearchResults(ExpenseChecked, IncomeChecked, PastMonthChecked,
+                PastThreeMonthChecked, PastSixMonthChecked, SelectedCategory, AvailCategories, recordBook.RecordList);
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

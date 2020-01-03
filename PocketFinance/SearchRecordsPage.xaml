@@ -113,10 +113,10 @@
         </StackLayout>
 
         <!--listview stuff-->
-        <ListView ItemsSource="{Binding SearchResult}"
+        <ListView ItemsSource="{Binding SearchResult, Mode=TwoWay}"
                   BackgroundColor="Wheat"
                   Margin="30,0,30,30"
-                  SelectedItem="{Binding SelectedListItem}"
+                  SelectedItem="{Binding SelectedListItem, Mode=TwoWay}"
                   IsPullToRefreshEnabled="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
