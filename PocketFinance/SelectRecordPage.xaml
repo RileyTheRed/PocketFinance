@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PocketFinance.SelectRecordPage"
-             BackgroundColor="Gray">
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
 
     <!--master stacklayout-->
     <StackLayout Orientation="Vertical">
@@ -38,7 +39,13 @@
 
                     <CheckBox Color="Lime"
                               Scale="0.7"
-                              IsChecked="{Binding ExpenseChecked}"/>
+                              IsChecked="{Binding ExpenseChecked}">
+                        <CheckBox.Behaviors>
+                            <behavior:EventToCommandBehavior
+                                EventName="CheckedChanged"
+                                Command="{Binding ExpenseChangedChanged}"/>
+                        </CheckBox.Behaviors>
+                    </CheckBox>
 
                     <Label Text="Expense"
                            TextColor="Wheat"
@@ -50,7 +57,13 @@
 
                     <CheckBox Color="Lime"
                               Scale="0.7"
-                              IsChecked="{Binding IncomeChecked}"/>
+                              IsChecked="{Binding IncomeChecked}">
+                        <CheckBox.Behaviors>
+                            <behavior:EventToCommandBehavior
+                                EventName="CheckedChanged"
+                                Command="{Binding IncomeCheckedChanged}"/>
+                        </CheckBox.Behaviors>
+                    </CheckBox>
 
                     <Label Text="Income"
                            TextColor="Wheat"
@@ -70,9 +83,15 @@
                        VerticalOptions="Center"/>
 
                 <Entry WidthRequest="200"
-                       BackgroundColor="Wheat"
+                       BackgroundColor="{Binding AmountColor}"
                        Placeholder="Amount..."
-                       Text="{Binding Amount}"/>
+                       Text="{Binding Amount}">
+                    <Entry.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding AmountLostFocus}"/>
+                    </Entry.Behaviors>
+                </Entry>
 
             </StackLayout>
 
@@ -85,10 +104,16 @@
                        VerticalOptions="Center"/>
 
                 <Picker WidthRequest="200"
-                        BackgroundColor="Wheat"
+                        BackgroundColor="{Binding CategoryColor}"
                         Title="Category..."
                         SelectedIndex="{Binding SelectedCategoryIndex}"
-                        ItemsSource="{Binding AvailCategories}"/>
+                        ItemsSource="{Binding AvailCategories}">
+                    <Picker.Behaviors>
+                        <behavior:EventToCommandBehavior
+                            EventName="Unfocused"
+                            Command="{Binding CategoryLostFocus}"/>
+                    </Picker.Behaviors>
+                </Picker>
 
             </StackLayout>
 
@@ -102,7 +127,8 @@
 
                 <DatePicker WidthRequest="200"
                             BackgroundColor="Wheat"
-                            Date="{Binding Date}"/>
+                            Date="{Binding Date}"
+                            MaximumDate="{Binding MaxDateValue}"/>
 
             </StackLayout>
 
@@ -121,7 +147,8 @@
                         TextColor="Black"
                         BackgroundColor="Wheat"
                         WidthRequest="130"
-                        IsEnabled="False"/>
+                        IsEnabled="{Binding SubmitEnabled}"
+                        Command="{Binding SubmitClickedCommand}"/>
 
             </StackLayout>
 
