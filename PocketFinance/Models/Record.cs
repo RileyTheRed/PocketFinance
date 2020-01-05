@@ -3,40 +3,52 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Serialization;
 using PocketFinance.Utilities;
+using SQLite;
 
 namespace PocketFinance.Models
 {
-    [XmlRoot(ElementName ="Record")]
     public class Record
     {
 
         #region Properties
-        [XmlIgnore]
-        private Random Random = new System.Random();
+        [Ignore]
+        private Random Random
+        {
+            get { return new System.Random(); }
+        }
 
-        [XmlAttribute(DataType = "string")]
+        [PrimaryKey]
         public string RecordID { get; set; }
 
-        [XmlAttribute(DataType = "double")]
         public double Amount { get; set; }
 
-        [XmlAttribute(DataType ="date")]
         public DateTime Date { get; set; }
 
-        [XmlAttribute(DataType ="string")]
         public string RecordType { get; set; } // income vs expense
 
-        [XmlAttribute(DataType ="string")]
         public string Category { get; set; }
 
-        [XmlAttribute(DataType ="string")]
         public string Description { get; set; }
 
-        [XmlAttribute(DataType ="boolean")]
         public bool IsDeleted { get; set; }
+
+        [Ignore]
+        public bool IsNew { get; set; }
+
+        [Ignore]
+        public bool IsModified { get; set; }
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public Record()
+        {
+            IsNew = false;
+            IsModified = false;
+        }
+
         /// <summary>
         /// Default constructor, for example, when reading in record information from a file.
         /// </summary>
@@ -56,6 +68,8 @@ namespace PocketFinance.Models
             Category = category;
             Description = desc;
             IsDeleted = isDeleted;
+            IsNew = false;
+            IsModified = false;
         }
 
         /// <summary>
@@ -76,6 +90,8 @@ namespace PocketFinance.Models
             Category = category;
             Description = desc;
             IsDeleted = isDeleted;
+            IsNew = true;
+            IsModified = false;
         }
         #endregion
 

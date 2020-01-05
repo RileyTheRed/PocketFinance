@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Screen Shot 2019-11-20 at 9.17.50 PM.jpg" />

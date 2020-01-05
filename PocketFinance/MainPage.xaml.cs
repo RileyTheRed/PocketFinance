@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PocketFinance.Models;
+using PocketFinance.Utilities;
 using PocketFinance.ViewModels;
 using Xamarin.Forms;
 
@@ -17,13 +18,21 @@ namespace PocketFinance
     {
 
         RecordBook book;
+        //RecordDatabase database;
 
-        public MainPage()
+        public MainPage(RecordBook recordBook)
         {
             InitializeComponent();
+            //database = db;
             BindingContext = new MainPageViewModel();
-            book = new RecordBook();
+            book = recordBook;
+            //book.RecordList = await database.GetNotesAsync();
         }
+
+        //async void getDatabase()
+        //{
+        //    book.RecordList = await database.GetNotesAsync();
+        //}
 
         void btnClicked_NewRecord(object sender, EventArgs e)
         {
