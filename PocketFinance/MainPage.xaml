@@ -44,6 +44,10 @@
             <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"
                     Clicked="btnClicked_ViewRecords"/>
+
+            <Button Text="{Binding viewChartsLabel}" TextColor="Black"
+                    BackgroundColor="Wheat" WidthRequest="200"
+                    Clicked="btnClicked_ViewCharts"/>
         </StackLayout>
 
     </Grid>

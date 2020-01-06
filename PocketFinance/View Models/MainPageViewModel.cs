@@ -29,6 +29,11 @@ namespace PocketFinance.ViewModels
         {
             get { return "View Records"; }
         }
+
+        public string viewChartsLabel
+        {
+            get { return "View Charts"; }
+        }
         #endregion
 
         public MainPageViewModel(/*RecordBook recordBook*/)

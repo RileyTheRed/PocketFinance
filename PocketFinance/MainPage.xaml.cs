@@ -43,5 +43,10 @@ namespace PocketFinance
         {
             Application.Current.MainPage = new SearchRecordsPage(this, book);
         }
+
+        void btnClicked_ViewCharts(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new ViewRecordChartsPage(book, this);
+        }
     }
 }
