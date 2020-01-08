@@ -36,7 +36,8 @@
 
         <!--bar chart-->
         <microcharts:ChartView HeightRequest="200"
-                               Margin="15,15,15,15"/>
+                               Margin="15,15,15,15"
+                               Chart="{Binding ExpenseBarChart, Mode=TwoWay}"/>
 
     </StackLayout>
 

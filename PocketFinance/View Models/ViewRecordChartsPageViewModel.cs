@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
+using Microcharts;
 using PocketFinance.Models;
+using PocketFinance.Utilities;
 using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels
@@ -49,6 +51,8 @@ namespace PocketFinance.ViewModels
             set
             {
                 _month = value;
+                if (value != null)
+                    ExpenseBarChart = new BarChart() { Entries = ChartCalculations.GetBarChart(Year, value, recordBook.RecordList) };
                 PropertyChanged(this, new PropertyChangedEventArgs("Month"));
             }
         }
@@ -72,6 +76,17 @@ namespace PocketFinance.ViewModels
             {
                 _availableMonths = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("AvailableMonths"));
+            }
+        }
+
+        private BarChart _barChart;
+        public BarChart ExpenseBarChart
+        {
+            get { return _barChart; }
+            set
+            {
+                _barChart = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ExpenseBarChart"));
             }
         }
         #endregion
@@ -114,9 +129,12 @@ namespace PocketFinance.ViewModels
             Dictionary<string, bool> pairs = new Dictionary<string, bool>();
             foreach (Record item in recordBook.RecordList)
             {
-                if (!pairs.ContainsKey(item.Date.Year.ToString()))
+                if (!item.IsDeleted)
                 {
-                    pairs.Add(item.Date.Year.ToString(), true);
+                    if (!pairs.ContainsKey(item.Date.Year.ToString()))
+                    {
+                        pairs.Add(item.Date.Year.ToString(), true);
+                    }
                 }
             }
             List<string> temp = new List<string>();
@@ -139,9 +157,12 @@ namespace PocketFinance.ViewModels
             Dictionary<int, bool> pairs = new Dictionary<int, bool>();
             foreach(Record item in recordBook.RecordList)
             {
-                if (item.Date.Year.ToString().Equals(Year) && !pairs.ContainsKey(item.Date.Month))
+                if (!item.IsDeleted)
                 {
-                    pairs.Add(item.Date.Month, true);
+                    if (item.Date.Year.ToString().Equals(Year) && !pairs.ContainsKey(item.Date.Month))
+                    {
+                        pairs.Add(item.Date.Month, true);
+                    }
                 }
             }
             List<string> temp = new List<string>();
