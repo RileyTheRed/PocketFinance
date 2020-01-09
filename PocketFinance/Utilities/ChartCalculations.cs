@@ -105,7 +105,7 @@ namespace PocketFinance.Utilities
                 }
                 total += item.Amount;
             }
-            categoryTotals.Add("Total", total);
+            //categoryTotals.Add("Total", total);
 
             // now create a list of entry values, and keep an inrement variable too
             int i = 0;
@@ -115,8 +115,9 @@ namespace PocketFinance.Utilities
                 returns.Add(new Entry((float)pair.Value)
                 {
                     Label = pair.Key,
-                    Color = SKColor.Parse(colors[i++])
-                });
+                    Color = SKColor.Parse(colors[i++]),
+                    ValueLabel = pair.Value.ToString()
+                }) ;
             }
             //returns.Add(new Entry((float)total)
             //{

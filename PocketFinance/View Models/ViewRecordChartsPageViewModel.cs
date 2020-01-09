@@ -52,7 +52,7 @@ namespace PocketFinance.ViewModels
             {
                 _month = value;
                 if (value != null)
-                    ExpenseBarChart = new BarChart() { Entries = ChartCalculations.GetBarChart(Year, value, recordBook.RecordList) };
+                    ExpenseBarChart = new DonutChart() { Entries = ChartCalculations.GetBarChart(Year, value, recordBook.RecordList) };
                 PropertyChanged(this, new PropertyChangedEventArgs("Month"));
             }
         }
@@ -79,8 +79,8 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        private BarChart _barChart;
-        public BarChart ExpenseBarChart
+        private DonutChart _barChart;
+        public DonutChart ExpenseBarChart
         {
             get { return _barChart; }
             set
