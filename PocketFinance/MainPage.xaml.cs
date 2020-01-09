@@ -39,6 +39,11 @@ namespace PocketFinance
             Application.Current.MainPage = new NewRecordPage(this, book);
         }
 
+        void btnClicked_NewCategory(object sender, EventArgs e)
+        {
+            //Application.Current.MainPage = new NewRecordPage(this, book);
+        }
+
         void btnClicked_ViewRecords(object sender, EventArgs e)
         {
             Application.Current.MainPage = new SearchRecordsPage(this, book);

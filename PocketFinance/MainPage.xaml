@@ -41,6 +41,10 @@
                     BackgroundColor="Wheat" WidthRequest="200"
                     Clicked="btnClicked_NewRecord"/>
 
+            <Button Text="{Binding newCategoryLabel}" TextColor="Black"
+                    BackgroundColor="Wheat" WidthRequest="200"
+                    Clicked="btnClicked_NewCategory"/>
+
             <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
                     BackgroundColor="Wheat" WidthRequest="200"
                     Clicked="btnClicked_ViewRecords"/>

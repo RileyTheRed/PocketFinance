@@ -25,11 +25,14 @@ namespace PocketFinance.ViewModels
         {
             get { return "New Record"; }
         }
+        public string newCategoryLabel
+        {
+            get { return "Add New Categories"; }
+        }
         public string viewRecordsLabel
         {
             get { return "View Records"; }
         }
-
         public string viewChartsLabel
         {
             get { return "View Charts"; }
