@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
@@ -69,7 +70,7 @@ namespace PocketFinance.ViewModels
                 _expenseChecked = value;
                 if (value == true)
                 {
-                    ExpenseTypes = Categories.GetExpenseCategories();
+                    ExpenseTypes = Categories.GetExpenseCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("expense")).Select(c => c.Category).ToList()).ToList();
                     IncomeChecked = false;
                 }
                 else
@@ -90,7 +91,7 @@ namespace PocketFinance.ViewModels
                 _incomeChecked = value;
                 if (value == true)
                 {
-                    ExpenseTypes = Categories.GetIncomeCategories();
+                    ExpenseTypes = Categories.GetIncomeCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("income")).Select(c => c.Category).ToList()).ToList();
                     ExpenseChecked = false;
                 }
                 else

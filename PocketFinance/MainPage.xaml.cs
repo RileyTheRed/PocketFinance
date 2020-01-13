@@ -42,6 +42,7 @@ namespace PocketFinance
         void btnClicked_NewCategory(object sender, EventArgs e)
         {
             //Application.Current.MainPage = new NewRecordPage(this, book);
+            Application.Current.MainPage = new NewCategoryPage(this, book);
         }
 
         void btnClicked_ViewRecords(object sender, EventArgs e)

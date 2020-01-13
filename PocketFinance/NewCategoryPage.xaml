@@ -14,7 +14,8 @@
                     TextColor="Black"
                     Margin="10,0,0,0"
                     VerticalOptions="End"
-                    FontSize="12"/>
+                    FontSize="12"
+                    Command="{Binding BackClickedCommand}"/>
 
         </StackLayout>
 
@@ -33,7 +34,8 @@
                 <StackLayout Orientation="Horizontal"
                              Margin="0,0,50,0">
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding ExpenseChecked}"/>
                     <Label Text="Expense"
                            FontSize="13"
                            VerticalOptions="Center"/>
@@ -41,7 +43,8 @@
 
                 <StackLayout Orientation="Horizontal">
                     <CheckBox Color="Lime"
-                              Scale="0.7"/>
+                              Scale="0.7"
+                              IsChecked="{Binding IncomeChecked}"/>
                     <Label Text="Income"
                            FontSize="13"
                            VerticalOptions="Center"/>
@@ -56,16 +59,18 @@
                 <Entry WidthRequest="170"
                        BackgroundColor="Wheat"
                        Placeholder="Enter new category..."
-                       TextColor="Black"/>
+                       TextColor="Black"
+                       Text="{Binding CustomCategoryName}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="Center"
                          Padding="30">
                 <Button Text="Create New Category"
-                    TextColor="Black"
-                    BackgroundColor="Wheat"
-                    WidthRequest="180"/>
+                        TextColor="Black"
+                        BackgroundColor="Wheat"
+                        WidthRequest="180"
+                        Command="{Binding SubmitClickedCommand}"/>
             </StackLayout>
 
         </StackLayout>
