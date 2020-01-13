@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
@@ -14,6 +15,7 @@ namespace PocketFinance.ViewModels
         #region Properties
         SelectRecordPage parentPage;
         Record record;
+        RecordBook recordBook;
 
         private string _deletedButtonText;
         public string DeletedButtonText
@@ -356,9 +358,10 @@ namespace PocketFinance.ViewModels
         }
         #endregion
 
-        public SelectRecordPageViewModel(SelectRecordPage parent, Record record)
+        public SelectRecordPageViewModel(SelectRecordPage parent, Record record, RecordBook book)
         {
             parentPage = parent;
+            recordBook = book;
             this.record = record;
             Amount = this.record.Amount.ToString();
             AmountColor = "Wheat";
@@ -388,7 +391,7 @@ namespace PocketFinance.ViewModels
         {
             if (eChecked)
             {
-                AvailCategories = Categories.GetExpenseCategories();
+                AvailCategories = Categories.GetExpenseCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("expense")).Select(c => c.Category).ToList()).ToList();
             }
             else if (iChecked)
             {

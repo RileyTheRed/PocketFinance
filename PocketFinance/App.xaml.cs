@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
 using Xamarin.Forms;
@@ -36,6 +38,27 @@ namespace PocketFinance
         {
             // Handle when your app starts
             recordBook.RecordList = await Database.GetNotesAsync();
+            List<string> customExpenseTypes = new List<string>();
+            List<string> customIncomeTypes = new List<string>();
+            List<string> allCoreCategories = Categories.GetExpenseCategories().Union(Categories.GetIncomeCategories()).ToList();
+            foreach (Record item in recordBook.RecordList)
+            {
+                if (!allCoreCategories.Contains(item.Category))
+                {
+                    if (item.RecordType.Equals("expense"))
+                        customExpenseTypes.Add(item.Category);
+                    else
+                        customIncomeTypes.Add(item.Category);
+                }
+            }
+            foreach (string item in customIncomeTypes)
+            {
+                recordBook.CustomCategories.Add(new CustomCategory(item, "income"));
+            }
+            foreach (string item in customExpenseTypes)
+            {
+                recordBook.CustomCategories.Add(new CustomCategory(item, "expense"));
+            }
         }
 
         async protected override void OnSleep()
@@ -45,7 +68,7 @@ namespace PocketFinance
             {
                 if (item.IsNew || item.IsModified)
                 {
-                    var temp = await Database.SaveNoteAsync(item);
+                    await Database.SaveNoteAsync(item);
                     item.IsNew = false;
                     item.IsModified = false;
                 }
