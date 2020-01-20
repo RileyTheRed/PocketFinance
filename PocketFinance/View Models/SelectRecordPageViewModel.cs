@@ -290,6 +290,7 @@ namespace PocketFinance.ViewModels
                 {
                     record.IsDeleted = true;
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }
@@ -307,6 +308,7 @@ namespace PocketFinance.ViewModels
                 {
                     record.IsDeleted = false;
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }
@@ -351,6 +353,7 @@ namespace PocketFinance.ViewModels
                     record.Date = Date;
                     record.Category = AvailCategories[SelectedCategoryIndex];
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }

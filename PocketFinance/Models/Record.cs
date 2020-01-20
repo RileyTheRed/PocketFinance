@@ -37,6 +37,8 @@ namespace PocketFinance.Models
 
         [Ignore]
         public bool IsModified { get; set; }
+
+        public DateTime LastModified { get; set; }
         #endregion
 
         #region Constructors
@@ -59,7 +61,7 @@ namespace PocketFinance.Models
         /// <param name="category"></param>
         /// <param name="desc"></param>
         /// <param name="isDeleted"></param>
-        public Record(string id, double amount, DateTime date, string recordType, string category, string desc, bool isDeleted)
+        public Record(string id, double amount, DateTime date, string recordType, string category, string desc, bool isDeleted, DateTime lastModified)
         {
             RecordID = id;
             Amount = amount;
@@ -70,6 +72,8 @@ namespace PocketFinance.Models
             IsDeleted = isDeleted;
             IsNew = false;
             IsModified = false;
+            LastModified = lastModified;
+
         }
 
         /// <summary>
@@ -92,6 +96,24 @@ namespace PocketFinance.Models
             IsDeleted = isDeleted;
             IsNew = true;
             IsModified = false;
+            LastModified = DateTime.Now;
+        }
+        #endregion
+
+        #region Overrides
+        public override bool Equals(object obj)
+        {
+            Record temp = obj as Record;
+
+            return (temp != null) &&
+                RecordID.Equals(temp.RecordID) &&
+                Amount == temp.Amount &&
+                Date == temp.Date &&
+                RecordType.Equals(temp.RecordType) &&
+                Category.Equals(temp.Category) &&
+                Description.Equals(temp.Description) &&
+                IsDeleted == temp.IsDeleted &&
+                LastModified == temp.LastModified;
         }
         #endregion
 
