@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
@@ -14,6 +15,7 @@ namespace PocketFinance.ViewModels
         #region Properties
         SelectRecordPage parentPage;
         Record record;
+        RecordBook recordBook;
 
         private string _deletedButtonText;
         public string DeletedButtonText
@@ -34,6 +36,17 @@ namespace PocketFinance.ViewModels
             {
                 _amount = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("Amount"));
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Description"));
             }
         }
 
@@ -156,18 +169,6 @@ namespace PocketFinance.ViewModels
         DelegateCommand _expenseCheckedChanged;
         public void ExpenseCheckChanged(object obj)
         {
-            //if (!ExpenseChecked && !IncomeChecked)
-            //{
-            //    SubmitEnabled = false;
-            //}
-            //else if (!ExpenseChecked && record.RecordType.Equals("expense"))
-            //{
-            //    SubmitEnabled = true;
-            //}
-            //else
-            //{
-            //    SubmitEnabled = true;
-            //}
         }
 
         public ICommand IncomeCheckedChanged
@@ -184,18 +185,6 @@ namespace PocketFinance.ViewModels
         DelegateCommand _incomeCheckedChanged;
         public void IncomeCheckChanged(object obj)
         {
-            //if (!ExpenseChecked && !IncomeChecked)
-            //{
-            //    SubmitEnabled = false;
-            //}
-            //else if (!IncomeChecked && record.RecordType.Equals("income"))
-            //{
-            //    SubmitEnabled = true;
-            //}
-            //else
-            //{
-            //    SubmitEnabled = true;
-            //}
         }
 
         public ICommand AmountLostFocus
@@ -288,6 +277,7 @@ namespace PocketFinance.ViewModels
                 {
                     record.IsDeleted = true;
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }
@@ -305,6 +295,7 @@ namespace PocketFinance.ViewModels
                 {
                     record.IsDeleted = false;
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }
@@ -348,7 +339,9 @@ namespace PocketFinance.ViewModels
                     record.Amount = Double.Parse(Amount);
                     record.Date = Date;
                     record.Category = AvailCategories[SelectedCategoryIndex];
+                    record.Description = Description;
                     record.IsModified = true;
+                    record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
                     Application.Current.MainPage = parentPage.parentPage;
                 }
@@ -356,13 +349,15 @@ namespace PocketFinance.ViewModels
         }
         #endregion
 
-        public SelectRecordPageViewModel(SelectRecordPage parent, Record record)
+        public SelectRecordPageViewModel(SelectRecordPage parent, Record record, RecordBook book)
         {
             parentPage = parent;
+            recordBook = book;
             this.record = record;
             Amount = this.record.Amount.ToString();
             AmountColor = "Wheat";
             CategoryColor = "Wheat";
+            Description = record.Description;
             Date = this.record.Date;
             if (this.record.RecordType.Equals("expense"))
             {
@@ -388,7 +383,7 @@ namespace PocketFinance.ViewModels
         {
             if (eChecked)
             {
-                AvailCategories = Categories.GetExpenseCategories();
+                AvailCategories = Categories.GetExpenseCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("expense")).Select(c => c.Category).ToList()).ToList();
             }
             else if (iChecked)
             {

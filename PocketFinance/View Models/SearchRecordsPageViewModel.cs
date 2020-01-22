@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
@@ -246,11 +247,11 @@ namespace PocketFinance.ViewModels
         {
             if (eChecked)
             {
-                AvailCategories = Categories.GetExpenseCategories();
+                AvailCategories = Categories.GetExpenseCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("expense")).Select(c => c.Category).ToList()).ToList();
             }
             else if (iChecked)
             {
-                AvailCategories = Categories.GetIncomeCategories();
+                AvailCategories = Categories.GetIncomeCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("income")).Select(c => c.Category).ToList()).ToList();
             }
             else
             {
@@ -262,6 +263,10 @@ namespace PocketFinance.ViewModels
                 foreach (string item in Categories.GetIncomeCategories())
                 {
                     temp.Add(item);
+                }
+                foreach (CustomCategory item in recordBook.CustomCategories)
+                {
+                    temp.Add(item.Category);
                 }
                 AvailCategories = temp;
             }

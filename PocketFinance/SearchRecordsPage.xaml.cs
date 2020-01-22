@@ -11,18 +11,20 @@ namespace PocketFinance
 
         public MainPage parentPage;
         public SearchRecordsPageViewModel vm;
+        RecordBook recordBook;
 
         public SearchRecordsPage(MainPage parent, RecordBook book)
         {
             InitializeComponent();
             parentPage = parent;
+            recordBook = book;
             vm = new SearchRecordsPageViewModel(this, book);
             BindingContext = vm;
         }
 
         public void ViewSelectedRecord(Record record)
         {
-            Application.Current.MainPage = new SelectRecordPage(this, record);
+            Application.Current.MainPage = new SelectRecordPage(this, record, recordBook);
         }
     }
 }

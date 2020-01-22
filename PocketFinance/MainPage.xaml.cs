@@ -18,30 +18,32 @@ namespace PocketFinance
     {
 
         RecordBook book;
-        //RecordDatabase database;
 
         public MainPage(RecordBook recordBook)
         {
             InitializeComponent();
-            //database = db;
             BindingContext = new MainPageViewModel();
             book = recordBook;
-            //book.RecordList = await database.GetNotesAsync();
         }
-
-        //async void getDatabase()
-        //{
-        //    book.RecordList = await database.GetNotesAsync();
-        //}
 
         void btnClicked_NewRecord(object sender, EventArgs e)
         {
             Application.Current.MainPage = new NewRecordPage(this, book);
         }
 
+        void btnClicked_NewCategory(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new NewCategoryPage(this, book);
+        }
+
         void btnClicked_ViewRecords(object sender, EventArgs e)
         {
             Application.Current.MainPage = new SearchRecordsPage(this, book);
+        }
+
+        void btnClicked_ViewCharts(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new ViewRecordChartsPage(book, this);
         }
     }
 }

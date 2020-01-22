@@ -12,6 +12,12 @@ namespace PocketFinance.Models
             get;
             set;
         }
+
+        public List<CustomCategory> CustomCategories
+        {
+            get;
+            set;
+        }
         #endregion
 
         public RecordBook()
@@ -28,6 +34,7 @@ namespace PocketFinance.Models
             //    new Record(123.1, DateTime.Now, "income", "Rental Income", "", false)
             //};
             RecordList = new List<Record>();
+            CustomCategories = new List<CustomCategory>();
         }
     }
 }

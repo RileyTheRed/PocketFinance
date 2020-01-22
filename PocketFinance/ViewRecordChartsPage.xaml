@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PocketFinance.ViewRecordChartsPage"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             BackgroundColor="Gray"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
+
+    <StackLayout Orientation="Vertical">
+
+        <!--back button bar stack layout-->
+        <StackLayout Orientation="Horizontal"
+                     BackgroundColor="Wheat"
+                     HeightRequest="60">
+            <Button Text="Back"
+                    TextColor="Black"
+                    Margin="20,0,0,0"
+                    VerticalOptions="End"
+                    Command="{Binding BackClickedCommand}"/>
+        </StackLayout>
+
+        <!--Pickers to select year/month to display chart values-->
+        <StackLayout Orientation="Horizontal"
+                     Padding="10"
+                     HorizontalOptions="CenterAndExpand">
+            <Picker Title="Year..."
+                    BackgroundColor="Wheat"
+                    SelectedItem="{Binding Year}"
+                    ItemsSource="{Binding AvailableYears}"/>
+            <Picker Title="Month..."
+                    BackgroundColor="Wheat"
+                    SelectedItem="{Binding Month}"
+                    ItemsSource="{Binding AvailableMonths}"
+                    WidthRequest="130"/>
+        </StackLayout>
+
+        <!--bar chart-->
+        <microcharts:ChartView HeightRequest="200"
+                               Margin="15,15,15,15"
+                               Chart="{Binding ExpenseBarChart, Mode=TwoWay}"/>
+
+    </StackLayout>
+
+</ContentPage>

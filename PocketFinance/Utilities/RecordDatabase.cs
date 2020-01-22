@@ -38,7 +38,6 @@ namespace PocketFinance.Utilities
             {
                 return _database.UpdateAsync(record);
             }
-            //return new Task<int>();
         }
 
         public Task<int> DeleteNoteAsync(Record record)
