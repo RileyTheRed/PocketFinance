@@ -39,6 +39,17 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Description"));
+            }
+        }
+
         private int _categoryIndex;
         public int CategoryIndex
         {
@@ -232,7 +243,7 @@ namespace PocketFinance.ViewModels
             {
                 string recordType = IncomeChecked ? "income" : "expense";
                 recordBook.RecordList.Add(
-                    new Record(Double.Parse(Amount), SelectedDate, recordType, ExpenseTypes[CategoryIndex], "", false)
+                    new Record(Double.Parse(Amount), SelectedDate, recordType, ExpenseTypes[CategoryIndex], Description, false)
                     );
                 var response = await parentPage.DisplayAlert("Success!", "Record added! Want to add another?",
                     "Yes", "No, I'm Done");

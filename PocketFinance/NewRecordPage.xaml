@@ -121,6 +121,17 @@
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
+                <Label Text="Desc:"
+                       FontSize="13"
+                       WidthRequest="75"
+                       VerticalTextAlignment="Center"/>
+                <Entry BackgroundColor="Wheat"
+                       WidthRequest="200"
+                       Placeholder="Enter Description..."
+                       Text="{Binding Description}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
                 <Label Text="Date:"
                        FontSize="13"
                        WidthRequest="75"

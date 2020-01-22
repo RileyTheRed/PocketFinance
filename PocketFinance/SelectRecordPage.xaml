@@ -117,6 +117,19 @@
 
             </StackLayout>
 
+            <!--record description stacklayout-->
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Desc:"
+                       WidthRequest="75"
+                       TextColor="Wheat"
+                       VerticalTextAlignment="Center"
+                       HorizontalOptions="StartAndExpand"/>
+                <Entry BackgroundColor="Wheat"
+                       WidthRequest="200"
+                       Placeholder="Description..."
+                       Text="{Binding Description}"/>
+            </StackLayout>
+
             <!--record date stacklayout-->
             <StackLayout Orientation="Horizontal">
 

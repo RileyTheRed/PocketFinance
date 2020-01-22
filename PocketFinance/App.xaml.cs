@@ -50,16 +50,13 @@ namespace PocketFinance
 
         async protected override void OnStart()
         {
-            //GetRecordsOnStart();
             List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
-            //List<Record> externalRecords = new List<Record>();
             List <Record> internalRecords = await Database.GetNotesAsync();
 
             List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
             recordBook.RecordList = masterList;
 
             // Handle when your app starts
-            //recordBook.RecordList = await Database.GetNotesAsync();
             List<string> customExpenseTypes = new List<string>();
             List<string> customIncomeTypes = new List<string>();
             List<string> allCoreCategories = Categories.GetExpenseCategories().Union(Categories.GetIncomeCategories()).ToList();
@@ -86,7 +83,6 @@ namespace PocketFinance
         async protected override void OnSleep()
         {
             //GetRecordsUpdatedOnSleep();
-            
         }
 
         protected override async void OnResume()
@@ -119,8 +115,36 @@ namespace PocketFinance
                             }
                         }
                     }
-
                 }
+            }
+
+            List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
+            List<Record> internalRecords = await Database.GetNotesAsync();
+
+            List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
+            recordBook.RecordList = masterList;
+
+            // Handle when your app starts
+            List<string> customExpenseTypes = new List<string>();
+            List<string> customIncomeTypes = new List<string>();
+            List<string> allCoreCategories = Categories.GetExpenseCategories().Union(Categories.GetIncomeCategories()).ToList();
+            foreach (Record item in recordBook.RecordList)
+            {
+                if (!allCoreCategories.Contains(item.Category))
+                {
+                    if (item.RecordType.Equals("expense"))
+                        customExpenseTypes.Add(item.Category);
+                    else
+                        customIncomeTypes.Add(item.Category);
+                }
+            }
+            foreach (string item in customIncomeTypes)
+            {
+                recordBook.CustomCategories.Add(new CustomCategory(item, "income"));
+            }
+            foreach (string item in customExpenseTypes)
+            {
+                recordBook.CustomCategories.Add(new CustomCategory(item, "expense"));
             }
         }
 

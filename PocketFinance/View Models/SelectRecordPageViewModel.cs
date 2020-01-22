@@ -39,6 +39,17 @@ namespace PocketFinance.ViewModels
             }
         }
 
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Description"));
+            }
+        }
+
         private int _selectedCategoryIndex;
         public int SelectedCategoryIndex
         {
@@ -158,18 +169,6 @@ namespace PocketFinance.ViewModels
         DelegateCommand _expenseCheckedChanged;
         public void ExpenseCheckChanged(object obj)
         {
-            //if (!ExpenseChecked && !IncomeChecked)
-            //{
-            //    SubmitEnabled = false;
-            //}
-            //else if (!ExpenseChecked && record.RecordType.Equals("expense"))
-            //{
-            //    SubmitEnabled = true;
-            //}
-            //else
-            //{
-            //    SubmitEnabled = true;
-            //}
         }
 
         public ICommand IncomeCheckedChanged
@@ -186,18 +185,6 @@ namespace PocketFinance.ViewModels
         DelegateCommand _incomeCheckedChanged;
         public void IncomeCheckChanged(object obj)
         {
-            //if (!ExpenseChecked && !IncomeChecked)
-            //{
-            //    SubmitEnabled = false;
-            //}
-            //else if (!IncomeChecked && record.RecordType.Equals("income"))
-            //{
-            //    SubmitEnabled = true;
-            //}
-            //else
-            //{
-            //    SubmitEnabled = true;
-            //}
         }
 
         public ICommand AmountLostFocus
@@ -352,6 +339,7 @@ namespace PocketFinance.ViewModels
                     record.Amount = Double.Parse(Amount);
                     record.Date = Date;
                     record.Category = AvailCategories[SelectedCategoryIndex];
+                    record.Description = Description;
                     record.IsModified = true;
                     record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
@@ -369,6 +357,7 @@ namespace PocketFinance.ViewModels
             Amount = this.record.Amount.ToString();
             AmountColor = "Wheat";
             CategoryColor = "Wheat";
+            Description = record.Description;
             Date = this.record.Date;
             if (this.record.RecordType.Equals("expense"))
             {
