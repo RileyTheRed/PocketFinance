@@ -105,13 +105,15 @@ namespace PocketFinance.Models
         {
             Record temp = obj as Record;
 
-            return (temp != null) &&
-                RecordID.Equals(temp.RecordID) &&
+            if (temp == null)
+                return false;
+
+            return RecordID.Equals(temp.RecordID) &&
                 Amount == temp.Amount &&
                 Date == temp.Date &&
                 RecordType.Equals(temp.RecordType) &&
                 Category.Equals(temp.Category) &&
-                Description.Equals(temp.Description) &&
+                //Description.Equals(temp.Description) && // TODO bug fix here, description is null if not set to something
                 IsDeleted == temp.IsDeleted &&
                 LastModified == temp.LastModified;
         }

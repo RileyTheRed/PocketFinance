@@ -339,7 +339,7 @@ namespace PocketFinance.ViewModels
                     record.Amount = Double.Parse(Amount);
                     record.Date = Date;
                     record.Category = AvailCategories[SelectedCategoryIndex];
-                    record.Description = Description;
+                    record.Description = Description ?? "";
                     record.IsModified = true;
                     record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
