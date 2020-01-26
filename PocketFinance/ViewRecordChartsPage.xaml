@@ -36,8 +36,74 @@
 
         <!--bar chart-->
         <microcharts:ChartView HeightRequest="200"
-                               Margin="15,15,15,15"
-                               Chart="{Binding ExpenseBarChart, Mode=TwoWay}"/>
+                               Margin="15,0,15,15"
+                               Chart="{Binding ExpenseBarChart, Mode=TwoWay}"
+                               IsVisible="{Binding ReportVisibility}"/>
+
+        <!--List view for categorical expense breakdown & income +/- -->
+        <ListView ItemsSource="{Binding CategoricalBreakdown, Mode=TwoWay}"
+                  BackgroundColor="Wheat"
+                  Margin="15,0,15,15"
+                  IsVisible="{Binding ReportVisibility}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+                            <Label Text="{Binding CategoryName}"
+                                   FontSize="12"
+                                   Margin="10,0"
+                                   TextColor="Black"
+                                   VerticalOptions="Center"
+                                   WidthRequest="100"/>
+                            <StackLayout Margin="10,0">
+                                <Label Text="Amount: "
+                                       FontSize="10"
+                                       TextColor="Black"/>
+                                <Label Text="{Binding Amount}"
+                                       FontSize="11"
+                                       TextColor="Black"/>
+                            </StackLayout>
+                            <StackLayout Margin="10,0">
+                                <Label Text="Average: "
+                                       FontSize="10"
+                                       TextColor="Black"/>
+                                <Label Text="{Binding AverageAmount}"
+                                       FontSize="11"
+                                       TextColor="Black"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Padding="15"
+                     VerticalOptions="Center"
+                     IsVisible="{Binding ReportVisibility}">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand"
+                         BackgroundColor="Wheat"
+                         HeightRequest="30">
+                <Label Text="Total Income:"
+                       VerticalOptions="Center"
+                       Margin="10,0"
+                       FontSize="12"/>
+                <Label Text="{Binding TotalMonthlyIncome}"
+                       VerticalOptions="Center"
+                       Margin="10,0"
+                       FontSize="12"/>
+                <Label Text="Leftover:"
+                       VerticalOptions="Center"
+                       Margin="10,0"
+                       FontSize="12"/>
+                <Label Text="{Binding TotalLeftover}"
+                       VerticalOptions="Center"
+                       Margin="10,0"
+                       FontSize="12"
+                       TextColor="{Binding LeftoverColor}"/>
+            </StackLayout>
+        </StackLayout>
 
     </StackLayout>
 
