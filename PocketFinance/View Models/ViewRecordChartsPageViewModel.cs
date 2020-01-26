@@ -52,7 +52,21 @@ namespace PocketFinance.ViewModels
             {
                 _month = value;
                 if (value != null)
+                {
                     ExpenseBarChart = new DonutChart() { Entries = ChartCalculations.GetBarChart(Year, value, recordBook.RecordList) };
+                    CategoricalBreakdown = ChartCalculations.GetCategoryReports(Year, value, recordBook.RecordList);
+                    ReportVisibility = true;
+                    TotalMonthlyIncome = ChartCalculations.GetTotalMonthlyIncome(Year, value, recordBook.RecordList);
+                    TotalLeftover = TotalMonthlyIncome - CategoricalBreakdown[CategoricalBreakdown.Count - 1].Amount;
+                    if (TotalLeftover < 0)
+                    {
+                        LeftoverColor = "Red";
+                    }
+                    else
+                    {
+                        LeftoverColor = "Green";
+                    }
+                }
                 PropertyChanged(this, new PropertyChangedEventArgs("Month"));
             }
         }
@@ -87,6 +101,61 @@ namespace PocketFinance.ViewModels
             {
                 _barChart = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("ExpenseBarChart"));
+            }
+        }
+
+        private List<CategoryReport> _categoricalBreakdown;
+        public List<CategoryReport> CategoricalBreakdown
+        {
+            get { return _categoricalBreakdown; }
+            set
+            {
+                _categoricalBreakdown = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CategoricalBreakdown"));
+            }
+        }
+
+        private bool _reportVisibility;
+        public bool ReportVisibility
+        {
+            get { return _reportVisibility; }
+            set
+            {
+                _reportVisibility = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ReportVisibility"));
+            }
+        }
+
+        private double _totalMonthlyIncome;
+        public double TotalMonthlyIncome
+        {
+            get { return _totalMonthlyIncome; }
+            set
+            {
+                _totalMonthlyIncome = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalMonthlyIncome"));
+            }
+        }
+
+        private double _totalLeftover;
+        public double TotalLeftover
+        {
+            get { return _totalLeftover; }
+            set
+            {
+                _totalLeftover = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("TotalLeftover"));
+            }
+        }
+
+        private string _leftoverColor;
+        public string LeftoverColor
+        {
+            get { return _leftoverColor; }
+            set
+            {
+                _leftoverColor = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LeftoverColor"));
             }
         }
         #endregion
