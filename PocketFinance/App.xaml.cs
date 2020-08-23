@@ -45,7 +45,8 @@ namespace PocketFinance
         {
             InitializeComponent();
             recordBook = new RecordBook();
-            MainPage = new MainPage(recordBook);
+            //MainPage = new MainPage(recordBook);
+            MainPage = new MasterDetail();
         }
 
         async protected override void OnStart()

@@ -31,13 +31,28 @@ namespace PocketFinance
 
             public MasterDetailMasterViewModel()
             {
-                MenuItems = new ObservableCollection<MasterDetailMenuItem>(new[]
+                //MenuItems = new ObservableCollection<MasterDetailMenuItem>(new[]
+                //{
+                //    new MasterDetailMenuItem { Id = 0, Title = "Page 1" },
+                //    new MasterDetailMenuItem { Id = 1, Title = "Page 2" },
+                //    new MasterDetailMenuItem { Id = 2, Title = "Page 3" },
+                //    new MasterDetailMenuItem { Id = 3, Title = "Page 4" },
+                //    new MasterDetailMenuItem { Id = 4, Title = "Page 5" },
+                //});
+                MenuItems = new ObservableCollection<MasterDetailMenuItem>();
+                // add all the different pages available to the list, but also
+                // change the Type of the pages to their respective types
+                MenuItems.Add(new MasterDetailMenuItem
                 {
-                    new MasterDetailMenuItem { Id = 0, Title = "Page 1" },
-                    new MasterDetailMenuItem { Id = 1, Title = "Page 2" },
-                    new MasterDetailMenuItem { Id = 2, Title = "Page 3" },
-                    new MasterDetailMenuItem { Id = 3, Title = "Page 4" },
-                    new MasterDetailMenuItem { Id = 4, Title = "Page 5" },
+                    Id = 0,
+                    Title = "Dashboard",
+                    TargetType = typeof(MainPage)
+                });
+                MenuItems.Add(new MasterDetailMenuItem
+                {
+                    Id = 1,
+                    Title = "New Record",
+                    TargetType = typeof(NewRecordPage)
                 });
             }
 

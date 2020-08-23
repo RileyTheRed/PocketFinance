@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using PocketFinance.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,7 +24,8 @@ namespace PocketFinance
             if (item == null)
                 return;
 
-            var page = (Page)Activator.CreateInstance(item.TargetType);
+            var page = (Page)Activator.CreateInstance(item.TargetType,
+                new object[] { new RecordBook()});
             page.Title = item.Title;
 
             Detail = new NavigationPage(page);
