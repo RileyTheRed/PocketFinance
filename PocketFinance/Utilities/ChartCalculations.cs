@@ -9,7 +9,7 @@ namespace PocketFinance.Utilities
 {
     public static class ChartCalculations
     {
-
+        
         static List<string> colors = new List<string>
         {
             "#E6E6FA",
@@ -65,7 +65,7 @@ namespace PocketFinance.Utilities
             }
         }
 
-        public static Entry[] GetBarChart(string year, string month, List<Record> records)
+        public static ChartEntry[] GetBarChart(string year, string month, List<Record> records)
         {
 
             int y = int.Parse(year);
@@ -98,10 +98,10 @@ namespace PocketFinance.Utilities
 
             // now create a list of entry values, and keep an inrement variable too
             int i = 0;
-            List<Entry> returns = new List<Entry>();
+            List<ChartEntry> returns = new List<ChartEntry>();
             foreach (KeyValuePair<string, double> pair in categoryTotals)
             {
-                returns.Add(new Entry((float)pair.Value)
+                returns.Add(new ChartEntry((float)pair.Value)
                 {
                     Label = pair.Key,
                     Color = SKColor.Parse(colors[i++]),
