@@ -12,10 +12,15 @@ namespace PocketFinance
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterDetail : MasterDetailPage
     {
-        public MasterDetail()
+
+        RecordBook masterBook;
+
+        public MasterDetail(RecordBook book)
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            masterBook = book;
+            Detail = new NavigationPage(new MainPage(masterBook));
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -25,7 +30,7 @@ namespace PocketFinance
                 return;
 
             var page = (Page)Activator.CreateInstance(item.TargetType,
-                new object[] { new RecordBook()});
+                new object[] { masterBook });
             page.Title = item.Title;
 
             Detail = new NavigationPage(page);

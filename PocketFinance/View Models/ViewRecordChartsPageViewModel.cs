@@ -161,22 +161,22 @@ namespace PocketFinance.ViewModels
         #endregion
 
         #region Commands
-        public ICommand BackClickedCommand
-        {
-            get
-            {
-                if (_backClickedCommand == null)
-                {
-                    _backClickedCommand = new DelegateCommand(BackButtonClicked);
-                }
-                return _backClickedCommand;
-            }
-        }
-        DelegateCommand _backClickedCommand;
-        public void BackButtonClicked(object obj)
-        {
-            Application.Current.MainPage = parentPage.parentPage;
-        }
+        //public ICommand BackClickedCommand
+        //{
+        //    get
+        //    {
+        //        if (_backClickedCommand == null)
+        //        {
+        //            _backClickedCommand = new DelegateCommand(BackButtonClicked);
+        //        }
+        //        return _backClickedCommand;
+        //    }
+        //}
+        //DelegateCommand _backClickedCommand;
+        //public void BackButtonClicked(object obj)
+        //{
+        //    Application.Current.MainPage = parentPage.parentPage;
+        //}
         #endregion
 
         public ViewRecordChartsPageViewModel(RecordBook book, ViewRecordChartsPage parent)

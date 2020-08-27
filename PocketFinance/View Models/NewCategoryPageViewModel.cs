@@ -58,23 +58,6 @@ namespace PocketFinance.ViewModels
         #endregion
 
         #region Commands
-        public ICommand BackClickedCommand
-        {
-            get
-            {
-                if (_backClickedCommand == null)
-                {
-                    _backClickedCommand = new DelegateCommand(BackButtonClicked);
-                }
-                return _backClickedCommand;
-            }
-        }
-        DelegateCommand _backClickedCommand;
-        public void BackButtonClicked(object obj)
-        {
-            Application.Current.MainPage = parentPage.parentPage;
-        }
-
         public ICommand SubmitClickedCommand
         {
             get
@@ -120,7 +103,7 @@ namespace PocketFinance.ViewModels
                         recordBook.CustomCategories.Add(new CustomCategory(CustomCategoryName, "income"));
 
                     await parentPage.DisplayAlert("Success", "New category added!", "Ok");
-                    Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
                 else
                 {

@@ -28,22 +28,28 @@ namespace PocketFinance
 
         void btnClicked_NewRecord(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NewRecordPage(this, book);
+            //Application.Current.MainPage = new NewRecordPage(this, book);
+            //(NavigationPage)Application.Current.MainPage
+            //NavigationPage.
+            Navigation.PushAsync(new NewRecordPage(this, book));
         }
 
         void btnClicked_NewCategory(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new NewCategoryPage(this, book);
+            //Application.Current.MainPage = new NewCategoryPage(this, book);
+            Navigation.PushAsync(new NewCategoryPage(this, book));
         }
 
         void btnClicked_ViewRecords(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new SearchRecordsPage(this, book);
+            //Application.Current.MainPage = new SearchRecordsPage(this, book);
+            Navigation.PushAsync(new SearchRecordsPage(this, book));
         }
 
         void btnClicked_ViewCharts(object sender, EventArgs e)
         {
-            Application.Current.MainPage = new ViewRecordChartsPage(book, this);
+            //Application.Current.MainPage = new ViewRecordChartsPage(book, this);
+            Navigation.PushAsync(new ViewRecordChartsPage(book, this));
         }
     }
 }

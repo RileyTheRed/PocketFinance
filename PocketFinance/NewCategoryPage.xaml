@@ -6,19 +6,6 @@
 
     <StackLayout Orientation="Vertical">
 
-        <StackLayout Orientation="Horizontal"
-                     BackgroundColor="Wheat"
-                     HeightRequest="60">
-
-            <Button Text="Back"
-                    TextColor="Black"
-                    Margin="10,0,0,0"
-                    VerticalOptions="End"
-                    FontSize="12"
-                    Command="{Binding BackClickedCommand}"/>
-
-        </StackLayout>
-
         <StackLayout Orientation="Vertical"
                      Padding="30">
 

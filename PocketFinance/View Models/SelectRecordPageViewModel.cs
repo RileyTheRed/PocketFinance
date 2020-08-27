@@ -236,24 +236,6 @@ namespace PocketFinance.ViewModels
             }
         }
 
-        public ICommand BackClickedCommand
-        {
-            get
-            {
-                if (_backClickedCommand == null)
-                {
-                    _backClickedCommand = new DelegateCommand(BackButtonClicked);
-                }
-                return _backClickedCommand;
-            }
-        }
-        DelegateCommand _backClickedCommand;
-        public void BackButtonClicked(object obj)
-        {
-            parentPage.parentPage.vm.Refresh();
-            Application.Current.MainPage = parentPage.parentPage;
-        }
-
         public ICommand DeleteClickedCommand
         {
             get
@@ -279,11 +261,13 @@ namespace PocketFinance.ViewModels
                     record.IsModified = true;
                     record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
                 else
                 {
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
             }
             else
@@ -297,11 +281,13 @@ namespace PocketFinance.ViewModels
                     record.IsModified = true;
                     record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
                 else
                 {
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
             }
 
@@ -343,7 +329,8 @@ namespace PocketFinance.ViewModels
                     record.IsModified = true;
                     record.LastModified = DateTime.Now;
                     parentPage.parentPage.vm.Refresh();
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
             }
         }

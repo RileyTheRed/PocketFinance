@@ -25,14 +25,6 @@
 
 
 
-        <!--TOP LABEL-->
-        <Label Text="New Income"
-               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
-               Margin="0,20,0,0" TextColor="Wheat"/>
-        <!--END LABEL-->
-
-
-
         <!--BUTTONS-->
         <StackLayout Grid.Column="1"
                      Grid.Row="1"
@@ -155,12 +147,6 @@
                     BackgroundColor="Wheat"
                     WidthRequest="200"
                     Command="{Binding SubmitRecordCommand}"/>
-            
-            <Button Text="Back"
-                    TextColor="Black"
-                    BackgroundColor="Wheat"
-                    WidthRequest="100"
-                    Command="{Binding BackClickedCommand}"/>
 
         </StackLayout>
 
