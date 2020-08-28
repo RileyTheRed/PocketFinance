@@ -48,12 +48,6 @@ namespace PocketFinance
                     Title = "Dashboard",
                     TargetType = typeof(MainPage)
                 });
-                MenuItems.Add(new MasterDetailMenuItem
-                {
-                    Id = 1,
-                    Title = "New Record",
-                    TargetType = typeof(NewRecordPage)
-                });
             }
 
             #region INotifyPropertyChanged Implementation

@@ -20,7 +20,8 @@ namespace PocketFinance
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
             masterBook = book;
-            Detail = new NavigationPage(new MainPage(masterBook));
+            Detail = new NavigationPage(new MainPage(masterBook)
+            { Title = "Dashboard" });
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -34,6 +35,7 @@ namespace PocketFinance
             page.Title = item.Title;
 
             Detail = new NavigationPage(page);
+            Title = item.Title;
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;
