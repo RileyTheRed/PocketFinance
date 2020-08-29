@@ -8,19 +8,6 @@
     <!--master stacklayout-->
     <StackLayout Orientation="Vertical">
 
-        <!--back button stacklayout-->
-        <StackLayout Orientation="Horizontal"
-                     BackgroundColor="Wheat"
-                     HeightRequest="60">
-
-            <Button Text="Back"
-                    TextColor="Black"
-                    Padding="10"
-                    VerticalOptions="End"
-                    Command="{Binding BackClickedCommand}"/>
-
-        </StackLayout>
-
         <!--main stacklayout-->
         <StackLayout Orientation="Vertical"
                      Padding="40">

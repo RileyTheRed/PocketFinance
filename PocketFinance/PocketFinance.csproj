@@ -10,20 +10,33 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
-    <PackageReference Include="Microcharts" Version="0.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.7" />
+    <PackageReference Include="Microcharts" Version="0.9.5.7" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.4" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Screen Shot 2019-11-20 at 9.17.50 PM.jpg" />
+    <None Remove="Images\piggyBank_Dashboard.jpg" />
+    <None Remove="Images\piggyBank_64px.png" />
+    <None Remove="Images\ledger_64px.png" />
+    <None Remove="Images\graph_64px.png" />
+    <None Remove="Images\search_98px.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View Models\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\piggyBank_Dashboard.jpg" />
+    <EmbeddedResource Include="Images\piggyBank_64px.png" />
+    <EmbeddedResource Include="Images\ledger_64px.png" />
+    <EmbeddedResource Include="Images\graph_64px.png" />
+    <EmbeddedResource Include="Images\search_98px.png" />
   </ItemGroup>
 </Project>

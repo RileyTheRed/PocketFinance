@@ -8,17 +8,6 @@
 
     <StackLayout Orientation="Vertical">
 
-        <!--back button bar stack layout-->
-        <StackLayout Orientation="Horizontal"
-                     BackgroundColor="Wheat"
-                     HeightRequest="60">
-            <Button Text="Back"
-                    TextColor="Black"
-                    Margin="20,0,0,0"
-                    VerticalOptions="End"
-                    Command="{Binding BackClickedCommand}"/>
-        </StackLayout>
-
         <!--Pickers to select year/month to display chart values-->
         <StackLayout Orientation="Horizontal"
                      Padding="10"

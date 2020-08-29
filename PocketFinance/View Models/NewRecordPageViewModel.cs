@@ -249,7 +249,8 @@ namespace PocketFinance.ViewModels
                     "Yes", "No, I'm Done");
                 if (!response)
                 {
-                    Application.Current.MainPage = parentPage.parentPage;
+                    //Application.Current.MainPage = parentPage.parentPage;
+                    await parentPage.Navigation.PopAsync();
                 }
                 else
                 {
@@ -271,23 +272,6 @@ namespace PocketFinance.ViewModels
                     "Ok"
                     );
             }
-        }
-
-        public ICommand BackClickedCommand
-        {
-            get
-            {
-                if (_backClickedCommand == null)
-                {
-                    _backClickedCommand = new DelegateCommand(BackButtonClicked);
-                }
-                return _backClickedCommand;
-            }
-        }
-        DelegateCommand _backClickedCommand;
-        public void BackButtonClicked(object obj)
-        {
-            Application.Current.MainPage = parentPage.parentPage;
         }
         #endregion
 

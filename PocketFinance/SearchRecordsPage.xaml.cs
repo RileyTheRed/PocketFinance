@@ -24,7 +24,8 @@ namespace PocketFinance
 
         public void ViewSelectedRecord(Record record)
         {
-            Application.Current.MainPage = new SelectRecordPage(this, record, recordBook);
+            //Application.Current.MainPage = new SelectRecordPage(this, record, recordBook);
+            Navigation.PushAsync(new SelectRecordPage(this, record, recordBook));
         }
     }
 }

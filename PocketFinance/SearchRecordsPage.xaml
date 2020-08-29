@@ -8,25 +8,6 @@
 
     <StackLayout Orientation="Vertical">
 
-        <StackLayout Orientation="Horizontal"
-                     HeightRequest="60"
-                     BackgroundColor="Wheat"
-                     Margin="0,0,0,10">
-            <Button Text="Back"
-                    TextColor="Black"
-                    VerticalOptions="End"
-                    Padding="20"
-                    FontSize="10"
-                    Command="{Binding BackClickedCommand}"
-                    HorizontalOptions="StartAndExpand"/>
-            <Button Text="Clear"
-                    TextColor="Black"
-                    VerticalOptions="End"
-                    Padding="20"
-                    FontSize="10"
-                    Command="{Binding ClearClickedCommand}"/>
-        </StackLayout>
-
         <Label Text="Select Search Criteria"
                VerticalOptions="Center"
                HorizontalOptions="Center"

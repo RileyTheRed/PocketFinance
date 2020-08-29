@@ -45,16 +45,18 @@ namespace PocketFinance
         {
             InitializeComponent();
             recordBook = new RecordBook();
-            MainPage = new MainPage(recordBook);
+            //MainPage = new MainPage(recordBook);
+            MainPage = new MasterDetail(recordBook);
         }
 
         async protected override void OnStart()
         {
-            List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
+            //List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
             List <Record> internalRecords = await Database.GetNotesAsync();
 
-            List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
-            recordBook.RecordList = masterList;
+            //List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
+            //recordBook.RecordList = masterList;
+            recordBook.RecordList = internalRecords;
 
             // Handle when your app starts
             List<string> customExpenseTypes = new List<string>();
@@ -82,13 +84,13 @@ namespace PocketFinance
 
         async protected override void OnSleep()
         {
-            //GetRecordsUpdatedOnSleep();
+            GetRecordsUpdatedOnSleep();
         }
 
         protected override async void OnResume()
         {
             // Handle when your app resumes
-            List<Record> tempAllExternal = await FirebaseDatabase.GetAllRecords();
+            //List<Record> tempAllExternal = await FirebaseDatabase.GetAllRecords();
 
             foreach (Record item in recordBook.RecordList)
             {
@@ -97,32 +99,33 @@ namespace PocketFinance
                     await Database.SaveNoteAsync(item);
                     item.IsNew = false;
                     item.IsModified = false;
-                    await FirebaseDatabase.InsertNewRecords(item);
+                    //await FirebaseDatabase.InsertNewRecords(item);
                 }
                 else if (item.IsModified)
                 {
                     item.IsModified = false;
                     await Database.SaveNoteAsync(item);
 
-                    foreach (Record item1 in tempAllExternal)
-                    {
-                        if (item.RecordID.Equals(item1.RecordID))
-                        {
-                            if (item.LastModified > item1.LastModified)
-                            {
-                                await FirebaseDatabase.UpdateSelectedRecord(item);
-                                break;
-                            }
-                        }
-                    }
+                    //foreach (Record item1 in tempAllExternal)
+                    //{
+                    //    if (item.RecordID.Equals(item1.RecordID))
+                    //    {
+                    //        if (item.LastModified > item1.LastModified)
+                    //        {
+                    //            await FirebaseDatabase.UpdateSelectedRecord(item);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
                 }
             }
 
-            List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
+            //List<Record> externalRecords = await FirebaseDatabase.GetAllRecords();
             List<Record> internalRecords = await Database.GetNotesAsync();
 
-            List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
-            recordBook.RecordList = masterList;
+            //List<Record> masterList = ListComparisonFunctions.GetMasterListFromExternalAndLocal(externalRecords, internalRecords);
+            //recordBook.RecordList = masterList;
+            recordBook.RecordList = internalRecords;
 
             // Handle when your app starts
             List<string> customExpenseTypes = new List<string>();
@@ -181,40 +184,40 @@ namespace PocketFinance
         //    }
         //}
 
-        //async protected void GetRecordsUpdatedOnSleep()
-        //{
-        //    List<Record> tempAllExternal = await FirebaseDatabase.GetAllRecords();
-        //
-        //    foreach (Record item in recordBook.RecordList)
-        //    {
-        //        if (item.IsNew)
-        //        {
-        //            await Database.SaveNoteAsync(item);
-        //            item.IsNew = false;
-        //            item.IsModified = false;
-        //            await FirebaseDatabase.InsertNewRecords(item);
-        //        }
-        //        else if (item.IsModified)
-        //        {
-        //            item.IsModified = false;
-        //            await Database.SaveNoteAsync(item);
-        //
-        //            foreach (Record item1 in tempAllExternal)
-        //            {
-        //                if (item.RecordID.Equals(item1.RecordID))
-        //                {
-        //                    if (item.LastModified > item1.LastModified)
-        //                    {
-        //                        await FirebaseDatabase.UpdateSelectedRecord(item);
-        //                        break;
-        //                    }
-        //                }
-        //            }
-        //
-        //        }
-        //    }
-        //
-        //    //GetRecordsOnStart();
-        //}
+        async protected void GetRecordsUpdatedOnSleep()
+        {
+            //List<Record> tempAllExternal = await FirebaseDatabase.GetAllRecords();
+        
+            foreach (Record item in recordBook.RecordList)
+            {
+                if (item.IsNew)
+                {
+                    await Database.SaveNoteAsync(item);
+                    item.IsNew = false;
+                    item.IsModified = false;
+                    //await FirebaseDatabase.InsertNewRecords(item);
+                }
+                else if (item.IsModified)
+                {
+                    item.IsModified = false;
+                    await Database.SaveNoteAsync(item);
+        
+                    //foreach (Record item1 in tempAllExternal)
+                    //{
+                    //    if (item.RecordID.Equals(item1.RecordID))
+                    //    {
+                    //        if (item.LastModified > item1.LastModified)
+                    //        {
+                    //            await FirebaseDatabase.UpdateSelectedRecord(item);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
+        
+                }
+            }
+        
+            //GetRecordsOnStart();
+        }
     }
 }
