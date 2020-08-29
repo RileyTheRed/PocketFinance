@@ -21,9 +21,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Screen Shot 2019-11-20 at 9.17.50 PM.jpg" />
+    <None Remove="Images\piggyBank_Dashboard.jpg" />
+    <None Remove="Images\piggyBank_64px.png" />
+    <None Remove="Images\ledger_64px.png" />
+    <None Remove="Images\graph_64px.png" />
+    <None Remove="Images\search_98px.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View Models\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\piggyBank_Dashboard.jpg" />
+    <EmbeddedResource Include="Images\piggyBank_64px.png" />
+    <EmbeddedResource Include="Images\ledger_64px.png" />
+    <EmbeddedResource Include="Images\graph_64px.png" />
+    <EmbeddedResource Include="Images\search_98px.png" />
   </ItemGroup>
 </Project>

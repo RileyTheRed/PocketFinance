@@ -4,56 +4,119 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             xmlns:local="clr-namespace:PocketFinance.Utilities"
              x:Class="PocketFinance.MainPage"
-             BackgroundColor="Gray">
+             BackgroundColor="LightSkyBlue">
 
-    <Grid>
+    <!--BUTTONS-->
+    <StackLayout Orientation="Vertical">
 
-        <!--Grid row and column defintions-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <!--end grid row and column defintions-->
+        <StackLayout>
 
+            <Grid BackgroundColor="WhiteSmoke">
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-        <!--TOP LABEL-->
-        <Label Text="PocketFinance"
-               Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"
-               Margin="0,20,0,0" TextColor="Wheat" TextDecorations="Underline"/>
-        <!--END LABEL-->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <Image Source="{local:ImageResource PocketFinance.Images.piggyBank_Dashboard.jpg}"
+                       Aspect="AspectFill"/>
 
+                <Label Text="Pocket Finance: Help Grow Your Money"
+                       TextColor="RoyalBlue"
+                       BackgroundColor="WhiteSmoke"
+                       Opacity="0.8"
+                       FontSize="Title"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"/>
 
-        <!--BUTTONS-->
-        <StackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Center"
-                     Orientation="Vertical">
+            </Grid>
 
-            <Button Text="{Binding newRecordLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_NewRecord"/>
-
-            <Button Text="{Binding newCategoryLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_NewCategory"/>
-
-            <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_ViewRecords"/>
-
-            <Button Text="{Binding viewChartsLabel}" TextColor="Black"
-                    BackgroundColor="Wheat" WidthRequest="200"
-                    Clicked="btnClicked_ViewCharts"/>
         </StackLayout>
 
-    </Grid>
+        <StackLayout Orientation="Horizontal">
 
+            <StackLayout Margin="20"
+                         HorizontalOptions="CenterAndExpand">
+
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.piggyBank_64px.png}"
+                             WidthRequest="100"
+                             HeightRequest="100"
+                             Clicked="btnClicked_NewRecord"/>
+                <Label Text="New Record"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="12"/>
+
+            </StackLayout>
+
+            <StackLayout Margin="20"
+                         HorizontalOptions="CenterAndExpand">
+
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.ledger_64px.png}"
+                             WidthRequest="100"
+                             HeightRequest="100"
+                             Clicked="btnClicked_NewCategory"/>
+                <Label Text="New Category"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="12"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+
+            <StackLayout Margin="20"
+                         HorizontalOptions="CenterAndExpand">
+
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.search_98px.png}"
+                             WidthRequest="100"
+                             HeightRequest="100"
+                             Clicked="btnClicked_ViewRecords"/>
+                <Label Text="Search Records"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="12"/>
+
+            </StackLayout>
+
+            <StackLayout Margin="20"
+                         HorizontalOptions="CenterAndExpand">
+
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.graph_64px.png}"
+                             WidthRequest="100"
+                             HeightRequest="100"
+                             Clicked="btnClicked_ViewCharts"/>
+                <Label Text="View Charts"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       FontSize="12"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+        <!--<Button Text="{Binding newRecordLabel}" TextColor="Black"
+                BackgroundColor="Wheat" WidthRequest="200"
+                Clicked="btnClicked_NewRecord"/>
+
+        <Button Text="{Binding newCategoryLabel}" TextColor="Black"
+                BackgroundColor="Wheat" WidthRequest="200"
+                Clicked="btnClicked_NewCategory"/>
+
+        <Button Text="{Binding viewRecordsLabel}" TextColor="Black"
+                BackgroundColor="Wheat" WidthRequest="200"
+                Clicked="btnClicked_ViewRecords"/>
+
+        <Button Text="{Binding viewChartsLabel}" TextColor="Black"
+                BackgroundColor="Wheat" WidthRequest="200"
+                Clicked="btnClicked_ViewCharts"/>-->
+
+    </StackLayout>
 </ContentPage>
