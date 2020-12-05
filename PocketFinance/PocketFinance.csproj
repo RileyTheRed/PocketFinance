@@ -26,6 +26,11 @@
     <None Remove="Images\ledger_64px.png" />
     <None Remove="Images\graph_64px.png" />
     <None Remove="Images\search_98px.png" />
+    <None Remove="Images\safe_48px.png" />
+    <None Remove="Images\safeIn_48px.png" />
+    <None Remove="Images\safeOut_48px.png" />
+    <None Remove="Images\checkboxChecked_48px.png" />
+    <None Remove="Images\checkboxUnchecked_48px.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View Models\" />
@@ -38,5 +43,10 @@
     <EmbeddedResource Include="Images\ledger_64px.png" />
     <EmbeddedResource Include="Images\graph_64px.png" />
     <EmbeddedResource Include="Images\search_98px.png" />
+    <EmbeddedResource Include="Images\safe_48px.png" />
+    <EmbeddedResource Include="Images\safeIn_48px.png" />
+    <EmbeddedResource Include="Images\safeOut_48px.png" />
+    <EmbeddedResource Include="Images\checkboxChecked_48px.png" />
+    <EmbeddedResource Include="Images\checkboxUnchecked_48px.png" />
   </ItemGroup>
 </Project>
