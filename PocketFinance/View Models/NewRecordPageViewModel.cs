@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
+using PocketFinance.Views;
 using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels

@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:local="clr-namespace:PocketFinance.Utilities"
-             x:Class="PocketFinance.MainPage"
+             x:Class="PocketFinance.Views.MainPage"
              BackgroundColor="LightSkyBlue">
 
     <!--BUTTONS-->
