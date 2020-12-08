@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PocketFinance
+namespace PocketFinance.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterDetailDetail : ContentPage

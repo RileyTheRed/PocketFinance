@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Input;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
+using PocketFinance.Views;
 using Xamarin.Forms;
 
 namespace PocketFinance.ViewModels
@@ -16,6 +18,42 @@ namespace PocketFinance.ViewModels
         #region Properties
         NewRecordPage parentPage;
         RecordBook recordBook;
+        Assembly executingAssembly;
+
+        public bool IsReccuringClicked { get; set; }
+
+        private string _expenseButtonBackgroundColor;
+        public string ExpenseButtonBackgroundColor
+        {
+            get { return _expenseButtonBackgroundColor; }
+            set
+            {
+                _expenseButtonBackgroundColor = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ExpenseButtonBackgroundColor"));
+            }
+        }
+
+        private string _incomeButtonBackgroundColor;
+        public string IncomeButtonBackgroundColor
+        {
+            get { return _incomeButtonBackgroundColor; }
+            set
+            {
+                _incomeButtonBackgroundColor = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("IncomeButtonBackgroundColor"));
+            }
+        }
+
+        private ImageSource _checkBoxImage;
+        public ImageSource CheckBoxImage
+        {
+            get { return _checkBoxImage; }
+            set
+            {
+                _checkBoxImage = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CheckBoxImage"));
+            }
+        }
 
         private string _amount;
         public string Amount
@@ -83,11 +121,15 @@ namespace PocketFinance.ViewModels
                 {
                     ExpenseTypes = Categories.GetExpenseCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("expense")).Select(c => c.Category).ToList()).ToList();
                     IncomeChecked = false;
+                    ExpenseButtonBackgroundColor = "LightGray";
                 }
                 else
                 {
                     if (IncomeChecked == false)
+                    {
                         ExpenseTypes = new List<string>();
+                        ExpenseButtonBackgroundColor = "WhiteSmoke";
+                    }
                 }
                 PropertyChanged(this, new PropertyChangedEventArgs("ExpenseChecked"));
             }
@@ -104,11 +146,15 @@ namespace PocketFinance.ViewModels
                 {
                     ExpenseTypes = Categories.GetIncomeCategories().Union(recordBook.CustomCategories.Where(c => c.CategoryType.Equals("income")).Select(c => c.Category).ToList()).ToList();
                     ExpenseChecked = false;
+                    IncomeButtonBackgroundColor = "LightGray";
                 }
                 else
                 {
                     if (ExpenseChecked == false)
+                    {
                         ExpenseTypes = new List<string>();
+                        IncomeButtonBackgroundColor = "WhiteSmoke";
+                    }
                 }
                 PropertyChanged(this, new PropertyChangedEventArgs("IncomeChecked"));
             }
@@ -174,6 +220,61 @@ namespace PocketFinance.ViewModels
         #endregion
 
         #region Commands
+        public ICommand ExpenseButtonCommand
+        {
+            get
+            {
+                if (_expenseButtonCommand == null)
+                {
+                    _expenseButtonCommand = new DelegateCommand(ExpenseButtonCommanded);
+                }
+                return _expenseButtonCommand;
+            }
+        }
+        DelegateCommand _expenseButtonCommand;
+        public void ExpenseButtonCommanded(object obj)
+        {
+            ExpenseChecked = !ExpenseChecked;
+        }
+
+        public ICommand IncomeButtonCommand
+        {
+            get
+            {
+                if (_incomeButtonCommand == null)
+                {
+                    _incomeButtonCommand = new DelegateCommand(IncomeButtonCommanded);
+                }
+                return _incomeButtonCommand;
+            }
+        }
+        DelegateCommand _incomeButtonCommand;
+        public void IncomeButtonCommanded(object obj)
+        {
+            IncomeChecked = !IncomeChecked;
+        }
+
+        public ICommand ReccuringButtonCommand
+        {
+            get
+            {
+                if (_recurringButtonCommand == null)
+                {
+                    _recurringButtonCommand = new DelegateCommand(RecurringButtonClicked);
+                }
+                return _recurringButtonCommand;
+            }
+        }
+        DelegateCommand _recurringButtonCommand;
+        public void RecurringButtonClicked(object obj)
+        {
+            IsReccuringClicked = !IsReccuringClicked;
+            if (IsReccuringClicked)
+                CheckBoxImage = ImageSource.FromResource("PocketFinance.Images.checkboxChecked_48px.png", executingAssembly);
+            else
+                CheckBoxImage = ImageSource.FromResource("PocketFinance.Images.checkboxUnchecked_48px.png", executingAssembly);
+        }
+
         public ICommand LostFocusAmount
         {
             get
@@ -191,7 +292,7 @@ namespace PocketFinance.ViewModels
             try
             {
                 _ = Double.Parse(_amount);
-                EntryAmountColor = "Green";
+                EntryAmountColor = "White";
             }
             catch
             {
@@ -238,7 +339,7 @@ namespace PocketFinance.ViewModels
         async public void SubmitClicked(object obj)
         {
             if (CategoryIndex != -1 &&
-                EntryAmountColor.Equals("Green") &&
+                !EntryAmountColor.Equals("Salmon") &&
                 SelectedDate != MinDateValue)
             {
                 string recordType = IncomeChecked ? "income" : "expense";
@@ -278,9 +379,9 @@ namespace PocketFinance.ViewModels
         public NewRecordPageViewModel(NewRecordPage parent, RecordBook book)
         {
             parentPage = parent;
-            EntryAmountColor = "Wheat";
-            PickerCategoryColor = "Wheat";
-            DatePickerColor = "Wheat";
+            //EntryAmountColor = "Wheat";
+            //PickerCategoryColor = "Wheat";
+            //DatePickerColor = "Wheat";
             MaxDateValue = DateTime.Now;
             SelectedDate = DateTime.Now;
             recordBook = book;
@@ -288,6 +389,9 @@ namespace PocketFinance.ViewModels
             ExpenseChecked = false;
             ExpenseTypes = new List<string>();
             CategoryIndex = -1;
+            executingAssembly = Assembly.GetExecutingAssembly();
+            CheckBoxImage = ImageSource.FromResource("PocketFinance.Images.checkboxUnchecked_48px.png", executingAssembly);
+            IsReccuringClicked = false;
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };

@@ -4,7 +4,7 @@ using PocketFinance.Models;
 using PocketFinance.ViewModels;
 using Xamarin.Forms;
 
-namespace PocketFinance
+namespace PocketFinance.Views
 {
     public partial class SearchRecordsPage : ContentPage
     {

@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1269" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
-    <PackageReference Include="Microcharts.Forms" Version="0.9.5.7" />
-    <PackageReference Include="Microcharts" Version="0.9.5.7" />
+    <PackageReference Include="Microcharts.Forms" Version="0.9.5.9" />
+    <PackageReference Include="Microcharts" Version="0.9.5.9" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.4" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.4.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -26,11 +26,17 @@
     <None Remove="Images\ledger_64px.png" />
     <None Remove="Images\graph_64px.png" />
     <None Remove="Images\search_98px.png" />
+    <None Remove="Images\safe_48px.png" />
+    <None Remove="Images\safeIn_48px.png" />
+    <None Remove="Images\safeOut_48px.png" />
+    <None Remove="Images\checkboxChecked_48px.png" />
+    <None Remove="Images\checkboxUnchecked_48px.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="View Models\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Images\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\piggyBank_Dashboard.jpg" />
@@ -38,5 +44,16 @@
     <EmbeddedResource Include="Images\ledger_64px.png" />
     <EmbeddedResource Include="Images\graph_64px.png" />
     <EmbeddedResource Include="Images\search_98px.png" />
+    <EmbeddedResource Include="Images\safe_48px.png" />
+    <EmbeddedResource Include="Images\safeIn_48px.png" />
+    <EmbeddedResource Include="Images\safeOut_48px.png" />
+    <EmbeddedResource Include="Images\checkboxChecked_48px.png" />
+    <EmbeddedResource Include="Images\checkboxUnchecked_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MasterDetailMaster.xaml.cs">
+      <DependentUpon>MasterDetailMaster.xaml</DependentUpon>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </Compile>
   </ItemGroup>
 </Project>

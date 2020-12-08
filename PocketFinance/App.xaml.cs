@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using PocketFinance.Models;
 using PocketFinance.Utilities;
+using PocketFinance.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

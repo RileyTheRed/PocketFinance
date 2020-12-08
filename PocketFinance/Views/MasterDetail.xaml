@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PocketFinance.MasterDetail" xmlns:pages="clr-namespace:PocketFinance" xmlns:pages1="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core">
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PocketFinance.Views.MasterDetail" xmlns:pages="clr-namespace:PocketFinance.Views" xmlns:pages1="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core">
     <MasterDetailPage.Master>
         <pages:MasterDetailMaster x:Name="MasterPage" />
     </MasterDetailPage.Master>

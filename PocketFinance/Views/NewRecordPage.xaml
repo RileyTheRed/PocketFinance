@@ -1,15 +1,132 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PocketFinance.NewRecordPage"
-             BackgroundColor="Gray"
-             xmlns:behavior="clr-namespace:PocketFinance.Behaviors">
+             x:Class="PocketFinance.Views.NewRecordPage"
+             BackgroundColor="LightSkyBlue"
+             xmlns:behavior="clr-namespace:PocketFinance.Behaviors"
+             xmlns:local="clr-namespace:PocketFinance.Utilities">
 
-    
+    <StackLayout>
 
-    <Grid>
+        <!-- Record Type Selection -->
+        <StackLayout Orientation="Horizontal"
+                     Margin="0,5,0,0"
+                     BackgroundColor="WhiteSmoke">
 
-        <!--Grid row and column defintions-->
+            <StackLayout BackgroundColor="{Binding ExpenseButtonBackgroundColor}"
+                         Margin="15,10,0,10"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.safeOut_48px.png}"
+                             Command="{Binding ExpenseButtonCommand}"/>
+                <Label Text="Expense"
+                       FontSize="12"/>
+            </StackLayout>
+
+            <Label Text="Type of Record?"
+                   FontSize="Header"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"/>
+
+            <StackLayout BackgroundColor="{Binding IncomeButtonBackgroundColor}"
+                         Margin="0,10,15,10"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+                <ImageButton Source="{local:ImageResource PocketFinance.Images.safeIn_48px.png}"
+                             Command="{Binding IncomeButtonCommand}"/>
+                <Label Text="Income"
+                       FontSize="12"/>
+            </StackLayout>
+
+        </StackLayout>
+        <!-- END Record Type Selection -->
+
+        <StackLayout Orientation="Horizontal"
+                     Margin="10,20,10,0">
+
+            <Entry Keyboard="Numeric"
+                   Placeholder="Amount"
+                   HeightRequest="65"
+                   MinimumHeightRequest="50"
+                   WidthRequest="110"
+                   MinimumWidthRequest="100"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Text="{Binding Amount}"
+                   BackgroundColor="{Binding EntryAmountColor}">
+                <Entry.Behaviors>
+                     <behavior:EventToCommandBehavior
+                         EventName="Unfocused"
+                         Command="{Binding LostFocusAmount}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Picker HeightRequest="65"
+                    MinimumHeightRequest="50"
+                    WidthRequest="200"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    ItemsSource="{Binding ExpenseTypes}"
+                    SelectedIndex="{Binding CategoryIndex}"
+                    Title="Category"/>
+
+        </StackLayout>
+
+        <Entry Margin="20,20,20,0"
+               WidthRequest="300"
+               HeightRequest="65"
+               Placeholder="Description"
+               HorizontalTextAlignment="Center"
+               VerticalTextAlignment="Center"
+               Text="{Binding Description}"/>
+
+        <StackLayout Margin="20,20,20,0"
+                     Orientation="Horizontal">
+
+            <DatePicker HeightRequest="65"
+                        WidthRequest="250"
+                        Format="D"
+                        HorizontalOptions="StartAndExpand"/>
+
+            <StackLayout>
+
+                <ImageButton Source="{Binding CheckBoxImage}"
+                             WidthRequest="35"
+                             HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Command="{Binding ReccuringButtonCommand}"/>
+
+                <Label Text="Recurring"
+                       FontSize="12"
+                       Margin="0,0,0,10"
+                       HorizontalTextAlignment="Center"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+        <Button WidthRequest="120"
+                HeightRequest="80"
+                VerticalOptions="EndAndExpand"
+                Margin="0,0,0,30"
+                HorizontalOptions="Center"
+                BackgroundColor="WhiteSmoke"
+                Text="Submit"
+                FontSize="Large"
+                FontAttributes="Bold"
+                Command="{Binding SubmitRecordCommand}"/>
+
+    </StackLayout>
+
+    <!--<Grid>
+
+        Grid row and column defintions
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -21,11 +138,19 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <!--end grid row and column defintions-->
+        end grid row and column defintions
 
 
 
-        <!--BUTTONS-->
+        <Image Source="{Binding SafeImage}">
+            <Image.Source>
+                <FileImageSource File="{Binding SafeImage}"/>
+            </Image.Source>
+        </Image>
+
+
+
+        BUTTONS
         <StackLayout Grid.Column="1"
                      Grid.Row="1"
                      HorizontalOptions="Center"
@@ -150,6 +275,6 @@
 
         </StackLayout>
 
-    </Grid>
+    </Grid>-->
 
 </ContentPage>
