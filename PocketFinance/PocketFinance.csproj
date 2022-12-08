@@ -17,7 +17,7 @@
     <PackageReference Include="Microcharts" Version="0.9.5.9" />
     <PackageReference Include="FirebaseDatabase.net" Version="4.0.4" />
     <PackageReference Include="FirebaseAuthentication.net" Version="3.4.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Screen Shot 2019-11-20 at 9.17.50 PM.jpg" />
